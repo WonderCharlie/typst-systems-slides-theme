@@ -34,7 +34,7 @@ CORE_OUTPUTS := $(addprefix $(TEST_OUTPUT_DIR)/,$(addsuffix .pdf,$(CORE_FIXTURES
 .PHONY: all starter catalog validate core-check fixture-check presenter-check \
 	package package-check package-stage local-install-check init-check \
 	install install-path install-check reinstall uninstall \
-	starter-verify catalog-verify catalog-structure-check catalog-visual-stability-check catalog-page-boundary-check catalog-lifecycle-check catalog-text-check title-contract-check page-mark-title-stability-check \
+	starter-verify catalog-verify catalog-structure-check catalog-visual-stability-check catalog-page-boundary-check catalog-lifecycle-check catalog-text-check title-contract-check page-mark-title-stability-check footer-contract-check \
 	starter-pdfpc catalog-pdfpc \
 	comment-check documentation-check tinymist-docs-static-check tinymist-docs-check \
 	tinymist-installed-docs-check editor-font-check font-isolation-check version-check api-naming-check public-check \
@@ -183,7 +183,7 @@ presenter-check: $(TEST_OUTPUT_DIR)/presenter-view.pdf $(STARTER_PDFPC)
 
 core-check: comment-check documentation-check tinymist-docs-static-check editor-font-check font-isolation-check version-check public-check title-contract-check page-mark-title-stability-check \
 	layout-diagnostics-check layout-debug-check body-flow-diagnostics-check body-flow-variation-check body-flow-distribution-check \
-	fixture-check presenter-check
+	footer-contract-check fixture-check presenter-check
 
 starter-verify: $(STARTER_OUTPUT)
 	$(PYTHON) tests/fidelity_check.py verify $(STARTER_OUTPUT) \
@@ -275,6 +275,9 @@ $(GUIDE_EXAMPLE_OUTPUT): $(shell find docs/guide/examples -type f | sort) $(STAB
 
 page-mark-title-stability-check: $(TEST_OUTPUT_DIR)/page-mark-title-stability.pdf
 	$(PYTHON) tests/page-mark-title-stability.py $<
+
+footer-contract-check: $(TEST_OUTPUT_DIR)/footer-contract.pdf
+	$(PYTHON) tests/footer-contract.py $<
 
 title-contract-check:
 	bash tests/title-contract.sh

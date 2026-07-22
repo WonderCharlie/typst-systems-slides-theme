@@ -11,6 +11,7 @@
 | Fixture | 主要契约 |
 | --- | --- |
 | `theme-api.typ` | 根入口、Theme 元数据、常用内容和 footer |
+| `footer-contract.typ` / `footer-contract.py` | Footer 的 500.5pt 起点、全高槽位居中、Logo 可见中心与多 DPI 底边填充 |
 | `native-theme.typ` | Theme 下原生 figure 编号、引用、caption 与列表语义 |
 | `lifecycle.typ` | 标题驱动页面、显式页面、page mark、frame 与逻辑计数 |
 | `navigation.typ` | outline 与章节进度读取同一组一级标题 |

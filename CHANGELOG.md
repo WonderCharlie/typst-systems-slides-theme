@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- Footer Logo 改用与标题、日期、页码一致的全高度槽位垂直居中，移除固定 `logo-dy`；
+  新增对称 Logo 与 72/96/144/288 DPI 底边填充契约测试。
 - 将初始化 Starter 收敛为标题、目录、默认 Points 与原生 figure 四页骨架。
 - 移除 Starter 对 Theme 源码仓库字体路径的回退，初始化 Deck 仅使用自身 `fonts/`。
 - 让产品级 Catalog 实际消费稳定的 `panel` 接口，并清理无消费者的媒体资产副本。

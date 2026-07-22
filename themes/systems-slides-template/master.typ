@@ -218,6 +218,13 @@
   self,
 ) = {
   let spec = systems-layout.footer
+  let footer-slot(body, horizontal: left) = block(
+    width: 100%,
+    height: 100%,
+    above: 0pt,
+    below: 0pt,
+    align(horizontal + horizon, body),
+  )
   let footer-text(body, horizontal: left, fit-width: none) = {
     let rendered = text(
       font: font-sans,
@@ -228,16 +235,7 @@
     if fit-width != none {
       rendered = utils.fit-to-width(width: fit-width, grow: false, rendered)
     }
-    block(
-      width: 100%,
-      height: 100%,
-      above: 0pt,
-      below: 0pt,
-      align(
-        horizontal + horizon,
-        rendered,
-      ),
-    )
+    footer-slot(rendered, horizontal: horizontal)
   }
 
   let footer-logo = self.store.at("footer-logo", default: none)
@@ -260,20 +258,21 @@
       columns: spec.columns,
       rows: (spec.height,),
       gutter: 0pt,
-      align(left + top, if footer-logo == none {
-        []
-      } else {
-        move(
-          dx: spec.logo-dx,
-          dy: spec.logo-dy,
-          render-media(
-            footer-logo,
-            width: resolved-logo-width,
-            height: spec.logo-height,
-            resolver: asset-resolver,
-          ),
-        )
-      }),
+      footer-slot(
+        if footer-logo == none {
+          []
+        } else {
+          move(
+            dx: spec.logo-dx,
+            render-media(
+              footer-logo,
+              width: resolved-logo-width,
+              height: spec.logo-height,
+              resolver: asset-resolver,
+            ),
+          )
+        },
+      ),
       footer-text(resolved-footer-title(self), fit-width: spec.title-width),
       footer-text(resolved-date(self)),
       [],

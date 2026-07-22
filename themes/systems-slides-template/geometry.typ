@@ -77,7 +77,6 @@
     logo-width: 59.25pt,
     logo-height: 31.5pt,
     logo-dx: -0.254pt,
-    logo-dy: 2.182pt,
   ),
   lead: (
     font: font-sans,
