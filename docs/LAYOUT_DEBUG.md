@@ -18,7 +18,7 @@ PDF 都保持无蒙版模式。
 
 ## 初始化后的 slides 工程
 
-`typst init @local/systems-slides-template:0.6.0 my-talk` 生成的项目直接对 `main.typ` 启动
+`typst init @local/systems-slides-template:0.6.1 my-talk` 生成的项目直接对 `main.typ` 启动
 Tinymist Preview 即可。需要静态布局诊断时，命令面板中的
 **Tasks: Run Task → slides: build layout debug PDF** 会额外生成：
 

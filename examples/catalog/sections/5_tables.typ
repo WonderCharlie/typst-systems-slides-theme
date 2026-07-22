@@ -2,7 +2,7 @@
 // Public API: slide, column-split, region, runtime; table and figure stay native Typst.
 // Defaults: 18pt cell text, header fill/weight, insets, rules, caption type and spacing.
 // Stable regions: progressive results retain table bounds, rows, columns, caption, and existing cells.
-#import "@local/systems-slides-template:0.6.0": (
+#import "@local/systems-slides-template:0.6.1": (
   callout,
   column-split,
   region,

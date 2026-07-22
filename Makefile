@@ -222,24 +222,26 @@ catalog-text-check: $(CATALOG_OUTPUT)
 
 catalog-verify: $(CATALOG_OUTPUT) catalog-structure-check catalog-visual-stability-check catalog-page-boundary-check catalog-lifecycle-check catalog-text-check
 	$(PYTHON) tests/fidelity_check.py verify $(CATALOG_OUTPUT) \
-		--pages 45 \
+		--pages 47 \
 		--contains '1:Relay: Dependency-Aware I/O Scheduling' \
-		--contains '2:Catalog Roadmap' \
-		--contains '5:Fixed Evidence, Progressive Interpretation' \
-		--contains '10:Require no application changes' \
-		--contains '17:Progressive Points in Stable Free Space' \
-		--contains '19:Require no application changes' \
-		--contains '22:Native Figure References' \
-		--contains '27:network delay overlaps compute' \
-		--contains '30:Complete pipeline' \
-		--contains '33:Experimental Configuration' \
-		--contains '36:Best result' \
-		--contains '39:Pseudocode with Explanation' \
-		--contains '40:Visible request latency' \
-		--contains '43:Dependency-Aware Scheduling Preserves Ordering' \
-		--contains '43:Across compute and remote storage boundaries' \
-		--contains '44:Titleless technical canvas' \
-		--contains '45:2×2 Evidence Matrix'
+		--contains '2:Default Roadmap' \
+		--contains '3:Current Roadmap' \
+		--contains '4:Roadmap Parameter Overrides' \
+		--contains '7:Fixed Evidence, Progressive Interpretation' \
+		--contains '12:Require no application changes' \
+		--contains '19:Progressive Points in Stable Free Space' \
+		--contains '21:Require no application changes' \
+		--contains '24:Native Figure References' \
+		--contains '29:network delay overlaps compute' \
+		--contains '32:Complete pipeline' \
+		--contains '35:Experimental Configuration' \
+		--contains '38:Best result' \
+		--contains '41:Pseudocode with Explanation' \
+		--contains '42:Visible request latency' \
+		--contains '45:Dependency-Aware Scheduling Preserves Ordering' \
+		--contains '45:Across compute and remote storage boundaries' \
+		--contains '46:Titleless technical canvas' \
+		--contains '47:2×2 Evidence Matrix'
 
 starter-pdfpc: $(STARTER_PDFPC)
 

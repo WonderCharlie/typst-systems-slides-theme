@@ -23,7 +23,7 @@ Deck
 
 Theme 不重新包装 Typst 原生图片、figure、表格、公式或引用。Deck 作者仍调用原生接口，
 Theme 只提供适合系统研究演示的默认字体、颜色、间距与页面区域。
-当前本地包坐标是 `@local/systems-slides-template:0.6.0`；安装和升级命令见
+当前本地包坐标是 `@local/systems-slides-template:0.6.1`；安装和升级命令见
 [INSTALL](INSTALL.md)。
 
 ## 按读者选择路径

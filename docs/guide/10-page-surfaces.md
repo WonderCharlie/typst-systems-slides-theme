@@ -83,4 +83,4 @@ typst compile --input layout-debug=labels main.typ build/debug-labels.pdf
 
 正常输出只显示内容；labels 输出叠加层次化区域。用边界判断 inset、gutter 和剩余空间，
 不要把调试框当坐标测量器：当前调试 PDF不显示精确 x/y/width/height 数值。详见
-[布局调试说明](../LAYOUT_DEBUG.md)。Catalog 第 44 页展示无 chrome 表面。
+[布局调试说明](../LAYOUT_DEBUG.md)。Catalog 第 46 页展示无 chrome 表面。

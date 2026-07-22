@@ -115,7 +115,7 @@ def single_line_title_contract(pdf: Path) -> list[str]:
     )
     errors: list[str] = []
     pages = re.findall(r"<page\b[^>]*>(.*?)</page>", completed.stdout, re.DOTALL)
-    ordinary_pages = set(range(3, 44)) | {45}
+    ordinary_pages = set(range(2, 46)) | {47}
     for page_number in ordinary_pages:
         blocks = re.findall(r"<block\b([^>]*)>(.*?)</block>", pages[page_number - 1], re.DOTALL)
         if not blocks:
@@ -146,9 +146,9 @@ def single_line_title_contract(pdf: Path) -> list[str]:
             errors.append(
                 f"page {page_number} title falls below the 30pt contract: glyph box={measured:.2f}pt"
             )
-        if page_number == 43 and heights and max(heights) > 43:
+        if page_number == 45 and heights and max(heights) > 43:
             errors.append(
-                f"page 43 no longer exercises near-minimum title fitting: glyph box={max(heights):.2f}pt"
+                f"page 45 no longer exercises near-minimum title fitting: glyph box={max(heights):.2f}pt"
             )
     return errors
 
@@ -163,16 +163,16 @@ def main() -> int:
         return 1
 
     stable = (
-        ((5, 6, 7), (180, 310, 3660, 1150), "top chart"),
-        ((8, 9, 10), (700, 1350, 3150, 1995), "bottom architecture"),
-        ((14, 15, 16), (700, 1690, 3200, 1995), "bottom storage foundation"),
-        ((17, 18, 19), (120, 270, 1700, 450), "top distributed point"),
-        ((25, 26, 27), (100, 330, 1810, 1120), "baseline comparison column"),
-        ((28, 29, 30), (60, 330, 1520, 780), "existing pipeline stages"),
-        ((31, 32), (60, 530, 3780, 650), "timeline axis"),
-        ((34, 35, 36), (230, 350, 2360, 1100), "existing result table cells"),
+        ((7, 8, 9), (180, 310, 3660, 1150), "top chart"),
+        ((10, 11, 12), (700, 1350, 3150, 1995), "bottom architecture"),
+        ((16, 17, 18), (700, 1690, 3200, 1995), "bottom storage foundation"),
+        ((19, 20, 21), (120, 270, 1700, 450), "top distributed point"),
+        ((27, 28, 29), (100, 330, 1810, 1120), "baseline comparison column"),
+        ((30, 31, 32), (60, 330, 1520, 780), "existing pipeline stages"),
+        ((33, 34), (60, 530, 3780, 650), "timeline axis"),
+        ((36, 37, 38), (230, 350, 2360, 1100), "existing result table cells"),
     )
-    pages_needed = set(range(1, 46))
+    pages_needed = set(range(1, 48))
     stored: dict[tuple[str, int], bytes] = {}
     title_bounds: dict[int, tuple[int, int]] = {}
     errors: list[str] = []
@@ -198,7 +198,7 @@ def main() -> int:
                         errors.append(f"{label} crop is unexpectedly empty on page {page}")
                     stored[(label, page)] = data
 
-            if page not in (1, 44):
+            if page not in (1, 46):
                 # Footer begins at 502pt. The 12pt band immediately above it
                 # must remain clear on every ordinary-chrome page.
                 safety = crop(image, (0, 1954, 960 * SCALE, 2002))
@@ -206,7 +206,7 @@ def main() -> int:
                 if ratio > 0.003:
                     errors.append(f"page {page} enters the 12pt Footer safety band ({ratio:.3%} non-white)")
 
-            if page == 3:
+            if page == 5:
                 # The final Y in the Catalog's RELAY wordmark occupies this
                 # right-edge strip. An undersized SVG viewBox clips it entirely.
                 logo_tail = light_pixel_count(
@@ -218,7 +218,7 @@ def main() -> int:
                         f"Catalog Footer logo is clipped at its right edge ({logo_tail} tail pixels)"
                     )
 
-            if page in set(range(3, 44)) | {45}:
+            if page in set(range(2, 46)) | {47}:
                 title_bounds[page] = purple_bounds(
                     image,
                     (20 * SCALE, 0, 940 * SCALE, 68 * SCALE),

@@ -27,7 +27,7 @@ Theme 安装 Touying 生命周期、16:9 页面、字体、标题区、Footer、
 ## 页面入口
 
 - `title-slide`：标题、作者、机构和活动标识；通常 `counted: false`。
-- `outline-slide`：读取章节结构生成目录；默认用与一级 Points 一致的实心圆标记。
+- `outline-slide`：接收章节内容生成 Roadmap；默认使用统一的 32pt/600 圆点与正文样式。
 - `section-slide`：显式章节分隔页；普通 Deck 不必启用自动章节页。
 - `slide`：普通或特殊页面，支持 title、marks、计数、repeat 和 callback-style body。
 - `== Title`：Touying 标题驱动页面；显式 `slide` 更适合需要 marks、repeat 或页面配置的场景。
@@ -35,19 +35,30 @@ Theme 安装 Touying 生命周期、16:9 页面、字体、标题区、Footer、
 逻辑页面是作者表达的一张 slide；渐进状态会生成多个物理 PDF 页面。`counted` 控制
 页面计数，不等同于 PDF 物理页数。
 
-Roadmap 条目较少且希望利用完整正文高度时，开启自动垂直分布：
+推荐把章节内容直接交给 Roadmap，Theme 同时控制标记、正文、缩进、基线和垂直分布：
 
 ```typst
 #outline-slide(
   title: [Roadmap],
-  level: 1,
-  auto-layout: true,
+  chapters: (
+    [Problem],
+    [Evidence],
+    [Design],
+    [Implementation],
+    [Evaluation],
+    [Conclusion],
+  ),
+  current: 3,
 )
 ```
 
-`auto-layout` 保留每个 heading 的自然高度，并均分其余垂直空间；不要再传 `vspace`。
-关闭时继续由 `spacing` 或显式 `vspace` 控制固定节奏。需要编号目录时，可显式传入
-`numbered: (true,)` 和 `numbering: ("1.",)` 覆盖默认圆点。
+默认 `auto-layout: true` 固定第一项的正文顶部锚点，只均分内部间距与底部余量；关闭后
+第一项位置保持不变，改用固定 `spacing`。`current` 默认通过主题紫色和 700 字重突出当前项，
+不会改变字号或推动其他条目。需要数字 Roadmap 时传 `numbering: "1."`；字号、普通字重、
+间距和 `current-style` 也可局部覆盖，但强调样式只能改变颜色与字重。
+
+不显式传 `chapters` 时，组件仍可查询 `level` 对应的 outlined headings。Roadmap 的规则只
+作用于本次 `outline-slide` 调用，不修改 Typst 原生列表或 `points`。
 
 ## 标题契约
 
@@ -66,5 +77,5 @@ Roadmap 条目较少且希望利用完整正文高度时，开启自动垂直分
 
 Page mark 属于标题 chrome，不进入正文流，也不应移动相同标题的垂直位置。
 
-Catalog 对应场景：Cover（第 1 页）、Roadmap（第 2 页）、Stable Slide Chrome（第 3 页）和
-Long Technical Title（第 43 页）。
+Catalog 对应场景：Cover（第 1 页）、三种 Roadmap（第 2–4 页）、Stable Slide Chrome
+（第 5 页）和 Long Technical Title（第 45 页）。

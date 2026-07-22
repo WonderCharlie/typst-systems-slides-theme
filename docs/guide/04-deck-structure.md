@@ -16,7 +16,7 @@ my-talk/
 ```
 
 `main.typ` 先安装 `deck-theme`，再按顺序 include section。section 不是独立文档，不应单独
-编译或预览。Deck 只从 `@local/systems-slides-template:0.6.0` 公共入口导入；不要引用包的
+编译或预览。Deck 只从 `@local/systems-slides-template:0.6.1` 公共入口导入；不要引用包的
 `src/`、`themes/`、master 或 geometry。
 
 ## 资源路径

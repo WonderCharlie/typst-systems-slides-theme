@@ -29,7 +29,10 @@ EXPECTED_PARAMS: dict[str, dict[str, tuple[str, ...]]] = {
             "config", "title-lines", "author-lines", "subtitle", "affiliations",
             "affiliation-layout", "event-mark", "event-layout", "extra", "counted",
         ),
-        "outline-slide": ("config", "level", "title", "spacing", "auto-layout", "setting", "..args"),
+        "outline-slide": (
+            "config", "chapters", "current", "level", "title", "numbering", "size", "weight",
+            "spacing", "auto-layout", "current-style", "setting",
+        ),
         "section-slide": ("config", "level", "numbered", "counted", "body"),
     },
     "themes/systems-slides-template/marks.typ": {

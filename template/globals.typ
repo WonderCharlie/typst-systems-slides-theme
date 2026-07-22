@@ -1,5 +1,5 @@
 // 所有章节只从本文件取得公共接口，避免直接依赖包内部 src/ 或兼容层。
-#import "@local/systems-slides-template:0.6.0": (
+#import "@local/systems-slides-template:0.6.1": (
   lead,
   outline-slide,
   point,

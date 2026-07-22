@@ -16,15 +16,15 @@ trap cleanup EXIT
 
 if typst compile --root "$THEME_DIR" --font-path "$FONT_PATH" \
   "$TEST_DIR/navigation-invalid.typ" "$QA_TMP/invalid.pdf" >"$QA_TMP/invalid.log" 2>&1; then
-  printf 'navigation diagnostics failed: conflicting vspace unexpectedly compiled\n' >&2
+  printf 'navigation diagnostics failed: geometry-changing current style unexpectedly compiled\n' >&2
   exit 1
 fi
 
-rg -Fq 'outline-slide: auto-layout and explicit vspace cannot be used together' \
+rg -Fq 'outline-slide.current-style may only define fill and weight' \
   "$QA_TMP/invalid.log" || {
     sed -n '1,100p' "$QA_TMP/invalid.log" >&2
-    printf 'navigation diagnostics failed: expected conflict message was not reported\n' >&2
+    printf 'navigation diagnostics failed: expected current-style message was not reported\n' >&2
     exit 1
   }
 
-printf 'navigation diagnostics: auto-layout rejects an explicit vspace override\n'
+printf 'navigation diagnostics: Roadmap emphasis cannot change geometry\n'

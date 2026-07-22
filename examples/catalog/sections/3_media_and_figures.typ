@@ -2,7 +2,7 @@
 // Public API: slide, column-split, row-split, region, lead, points.
 // Defaults: intrinsic images only shrink, figure captions use Theme type and spacing.
 // Stable regions: every media cell has a finite boundary; no image is stretched.
-#import "@local/systems-slides-template:0.6.0": (
+#import "@local/systems-slides-template:0.6.1": (
   column-split,
   lead,
   point,

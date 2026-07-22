@@ -17,16 +17,17 @@ def main() -> int:
         return 1
 
     expected_labels = (
-        "1", "1", "2", "3", "4", "4", "4", "5", "5", "5", "6", "6", "6", "7", "7", "7",
-        "8", "8", "8", "9", "10", "11", "12", "13", "14", "14", "14", "15", "15", "15",
-        "16", "16", "17", "18", "18", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27",
+        "1", "1", "2", "3", "4", "5", "6", "6", "6", "7", "7", "7", "8", "8", "8", "9",
+        "9", "9", "10", "10", "10", "11", "12", "13", "14", "15", "16", "16", "16", "17",
+        "17", "17", "18", "18", "19", "20", "20", "20", "21", "22", "23", "24", "25", "26",
+        "27", "28", "29",
     )
     labels = tuple(str(page.get("label")) for page in pages)
     errors: list[str] = []
     if labels != expected_labels:
         errors.append(f"unexpected logical labels: {labels}")
 
-    progressive = ((5, 7), (8, 10), (11, 13), (14, 16), (17, 19), (25, 27), (28, 30), (31, 32), (34, 36))
+    progressive = ((7, 9), (10, 12), (13, 15), (16, 18), (19, 21), (27, 29), (30, 32), (33, 34), (36, 38))
     for first, last in progressive:
         group = pages[first - 1:last]
         if len({page.get("label") for page in group}) != 1:
@@ -39,7 +40,7 @@ def main() -> int:
         for error in errors:
             print(f"- {error}", file=sys.stderr)
         return 1
-    print("Catalog lifecycle check passed: 45 physical pages preserve nine progressive logical-scene groups.")
+    print("Catalog lifecycle check passed: 47 physical pages preserve nine progressive logical-scene groups.")
     return 0
 
 

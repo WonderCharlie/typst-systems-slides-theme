@@ -2,7 +2,7 @@
 // Public API: title-slide, outline-slide, slide, page-mark, lead, points, split.
 // Defaults: Theme owns type, color, title rule, body boundary, Footer, tables, and raw code.
 // Stable regions: chrome never depends on body content or presentation state.
-#import "@local/systems-slides-template:0.6.0": (
+#import "@local/systems-slides-template:0.6.1": (
   callout,
   column-split,
   lead,
@@ -33,7 +33,33 @@
   counted: false,
 )
 
-#outline-slide(title: [Catalog Roadmap], level: 1, auto-layout: true)
+#let roadmap-chapters = (
+  [Problem],
+  [Evidence],
+  [Design],
+  [Implementation],
+  [Evaluation],
+  [Conclusion],
+)
+
+#outline-slide(title: [Default Roadmap], chapters: roadmap-chapters)
+
+#outline-slide(
+  title: [Current Roadmap],
+  chapters: roadmap-chapters,
+  current: 3,
+)
+
+#outline-slide(
+  title: [Roadmap Parameter Overrides],
+  chapters: roadmap-chapters,
+  current: 5,
+  numbering: "1.",
+  size: 28pt,
+  weight: 500,
+  spacing: 18pt,
+  current-style: (fill: typography.tone-green, weight: 700),
+)
 
 #slide(
   title: [Stable Slide Chrome],

@@ -1,7 +1,7 @@
-// Automatic outline and section-progress contract.
+// Roadmap and section-progress contract.
 //
-// There is no hand-maintained section array in this fixture. Both the roadmap
-// and the three progress dots must be derived from outlined level-one headings.
+// The first three pages exercise the consumer-facing Roadmap modes. The
+// section progress dots remain derived from outlined level-one headings.
 
 #import "../lib.typ": lead, outline-slide, systems-slides-theme, title-slide
 
@@ -16,7 +16,28 @@
 )
 
 #title-slide(counted: true)
-#outline-slide(title: [Automatic Roadmap], level: 1, auto-layout: true)
+#let chapters = (
+  [Problem],
+  [Observation],
+  [Design],
+  [Implementation],
+  [Evaluation],
+  [Conclusion],
+)
+
+#outline-slide(title: [Default Roadmap], chapters: chapters)
+#outline-slide(title: [Current Roadmap], chapters: chapters, current: 3)
+#outline-slide(
+  title: [Numbered Roadmap],
+  chapters: chapters,
+  current: 5,
+  numbering: "1.",
+  size: 28pt,
+  weight: 500,
+  spacing: 18pt,
+  current-style: (fill: rgb("16835d"), weight: 700),
+)
+#outline-slide(title: [Fixed Roadmap], chapters: chapters, auto-layout: false)
 
 = Alpha Section
 

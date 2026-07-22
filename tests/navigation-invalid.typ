@@ -2,7 +2,7 @@
 
 #show: systems-slides-theme.with(section-progress: false, section-slides: false)
 
-#outline-slide(auto-layout: true, vspace: (12pt,))
+#outline-slide(chapters: ([One], [Two]), current-style: (size: 36pt,))
 
 = Section
 

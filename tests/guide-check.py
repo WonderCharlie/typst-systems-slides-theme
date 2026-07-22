@@ -43,33 +43,35 @@ PUBLIC_BINDINGS = (
 
 CATALOG = (
     ("Cover", "1", "1_foundations.typ", "Relay: Dependency-Aware I/O Scheduling"),
-    ("Roadmap", "2", "1_foundations.typ", "Catalog Roadmap"),
-    ("Stable Slide Chrome", "3", "1_foundations.typ", "Stable Slide Chrome"),
-    ("Native Typst Content", "4", "1_foundations.typ", "Native Typst Content"),
-    ("Fixed Evidence, Progressive Interpretation", "5–7", "2_progressive_vertical.typ", "Fixed Evidence, Progressive Interpretation"),
-    ("Progressive Requirements, Fixed Architecture", "8–10", "2_progressive_vertical.typ", "Progressive Requirements, Fixed Architecture"),
-    ("Reserve, Release, and Replace", "11–13", "2_progressive_vertical.typ", "Reserve, Release, and Replace"),
-    ("Bottom-Aligned Layer Growth", "14–16", "2_progressive_vertical.typ", "Bottom-Aligned Layer Growth"),
-    ("Progressive Points in Stable Free Space", "17–19", "2_progressive_vertical.typ", "Progressive Points in Stable Free Space"),
-    ("Native Image Ratios", "20", "3_media_and_figures.typ", "Native Image Ratios"),
-    ("Caption Placement", "21", "3_media_and_figures.typ", "Caption Placement"),
-    ("Native Figure References", "22", "3_media_and_figures.typ", "Native Figure References"),
-    ("Dominant Figure and Takeaway", "23", "3_media_and_figures.typ", "Dominant Figure and Takeaway"),
-    ("Unequal Evidence Columns", "24", "3_media_and_figures.typ", "Unequal Evidence Columns"),
-    ("Stable Before/After Comparison", "25–27", "4_comparison_and_pipeline.typ", "Stable Before/After Comparison"),
-    ("Fixed-Track Pipeline", "28–30", "4_comparison_and_pipeline.typ", "Fixed-Track Pipeline"),
-    ("Stable Timeline", "31–32", "4_comparison_and_pipeline.typ", "Stable Timeline"),
-    ("Experimental Configuration", "33", "5_tables.typ", "Experimental Configuration"),
-    ("Progressive Results Table", "34–36", "5_tables.typ", "Progressive Results Table"),
-    ("Chart and Exact Values", "37", "5_tables.typ", "Chart and Exact Values"),
-    ("Curating Wide Tables", "38", "5_tables.typ", "Curating Wide Tables"),
-    ("Pseudocode with Explanation", "39", "6_technical_content.typ", "Pseudocode with Explanation"),
-    ("Formula, Symbols, and Conclusion", "40", "6_technical_content.typ", "Formula, Symbols, and Conclusion"),
-    ("Quotes, Footnotes, and Sources", "41", "6_technical_content.typ", "Quotes, Footnotes, and Sources"),
-    ("Metrics Dashboard", "42", "6_technical_content.typ", "Metrics Dashboard"),
-    ("Long Single-Line Title Contract", "43", "7_surfaces.typ", "Dependency-Aware Scheduling Preserves Ordering"),
-    ("Titleless Technical Canvas", "44", "7_surfaces.typ", "Titleless technical canvas"),
-    ("2×2 Evidence Matrix", "45", "7_surfaces.typ", "2×2 Evidence Matrix"),
+    ("Default Roadmap", "2", "1_foundations.typ", "Default Roadmap"),
+    ("Current Roadmap", "3", "1_foundations.typ", "Current Roadmap"),
+    ("Roadmap Parameter Overrides", "4", "1_foundations.typ", "Roadmap Parameter Overrides"),
+    ("Stable Slide Chrome", "5", "1_foundations.typ", "Stable Slide Chrome"),
+    ("Native Typst Content", "6", "1_foundations.typ", "Native Typst Content"),
+    ("Fixed Evidence, Progressive Interpretation", "7–9", "2_progressive_vertical.typ", "Fixed Evidence, Progressive Interpretation"),
+    ("Progressive Requirements, Fixed Architecture", "10–12", "2_progressive_vertical.typ", "Progressive Requirements, Fixed Architecture"),
+    ("Reserve, Release, and Replace", "13–15", "2_progressive_vertical.typ", "Reserve, Release, and Replace"),
+    ("Bottom-Aligned Layer Growth", "16–18", "2_progressive_vertical.typ", "Bottom-Aligned Layer Growth"),
+    ("Progressive Points in Stable Free Space", "19–21", "2_progressive_vertical.typ", "Progressive Points in Stable Free Space"),
+    ("Native Image Ratios", "22", "3_media_and_figures.typ", "Native Image Ratios"),
+    ("Caption Placement", "23", "3_media_and_figures.typ", "Caption Placement"),
+    ("Native Figure References", "24", "3_media_and_figures.typ", "Native Figure References"),
+    ("Dominant Figure and Takeaway", "25", "3_media_and_figures.typ", "Dominant Figure and Takeaway"),
+    ("Unequal Evidence Columns", "26", "3_media_and_figures.typ", "Unequal Evidence Columns"),
+    ("Stable Before/After Comparison", "27–29", "4_comparison_and_pipeline.typ", "Stable Before/After Comparison"),
+    ("Fixed-Track Pipeline", "30–32", "4_comparison_and_pipeline.typ", "Fixed-Track Pipeline"),
+    ("Stable Timeline", "33–34", "4_comparison_and_pipeline.typ", "Stable Timeline"),
+    ("Experimental Configuration", "35", "5_tables.typ", "Experimental Configuration"),
+    ("Progressive Results Table", "36–38", "5_tables.typ", "Progressive Results Table"),
+    ("Chart and Exact Values", "39", "5_tables.typ", "Chart and Exact Values"),
+    ("Curating Wide Tables", "40", "5_tables.typ", "Curating Wide Tables"),
+    ("Pseudocode with Explanation", "41", "6_technical_content.typ", "Pseudocode with Explanation"),
+    ("Formula, Symbols, and Conclusion", "42", "6_technical_content.typ", "Formula, Symbols, and Conclusion"),
+    ("Quotes, Footnotes, and Sources", "43", "6_technical_content.typ", "Quotes, Footnotes, and Sources"),
+    ("Metrics Dashboard", "44", "6_technical_content.typ", "Metrics Dashboard"),
+    ("Long Single-Line Title Contract", "45", "7_surfaces.typ", "Dependency-Aware Scheduling Preserves Ordering"),
+    ("Titleless Technical Canvas", "46", "7_surfaces.typ", "Titleless technical canvas"),
+    ("2×2 Evidence Matrix", "47", "7_surfaces.typ", "2×2 Evidence Matrix"),
 )
 
 
@@ -129,8 +131,8 @@ for scene, pages, filename, anchor in CATALOG:
         ).stdout
         if anchor not in extracted:
             fail(f"Catalog page {page} no longer matches {scene!r}; missing {anchor!r}")
-if covered_pages != set(range(1, 46)):
-    fail(f"Catalog mapping covers {sorted(covered_pages)}, expected pages 1..45")
+if covered_pages != set(range(1, 48)):
+    fail(f"Catalog mapping covers {sorted(covered_pages)}, expected pages 1..47")
 
 manifest = tomllib.loads((ROOT / "typst.toml").read_text(encoding="utf-8"))
 package = manifest["package"]
@@ -154,5 +156,5 @@ for forbidden in ("src/", "themes/", "/Users/", "Arial", "Helvetica"):
 
 print(
     f"Guide check passed: {len(CHAPTERS)} chapters, {len(PUBLIC_BINDINGS)} public bindings, "
-    f"{len(CATALOG)} Catalog scenes / 45 pages, and one public-only executable example."
+    f"{len(CATALOG)} Catalog scenes / 47 pages, and one public-only executable example."
 )

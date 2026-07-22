@@ -16,7 +16,7 @@ FOOTER_CENTER_Y = (FOOTER_Y + 540.0) / 2
 FOOTER_CENTER_TOLERANCE = 0.05
 FOOTER_TEXT_X_MIN = 200.0
 BODY_TEXT_X_MAX = 830.0
-ORDINARY_PAGES = set(range(3, 44)) | {45}
+ORDINARY_PAGES = set(range(2, 46)) | {47}
 
 
 def attributes(source: str) -> dict[str, float]:
@@ -79,7 +79,7 @@ def main() -> int:
                     )
 
     text = subprocess.run(
-        ["pdftotext", "-f", "44", "-l", "44", str(pdf), "-"],
+        ["pdftotext", "-f", "46", "-l", "46", str(pdf), "-"],
         check=True,
         stdout=subprocess.PIPE,
         stderr=subprocess.PIPE,
@@ -88,7 +88,7 @@ def main() -> int:
     normalized = " ".join(text.split())
     required = "Use a chrome-free surface only when the whole page is the composition."
     if required not in normalized:
-        errors.append("page 44 does not contain the complete narrow-column lead sentence")
+        errors.append("page 46 does not contain the complete narrow-column lead sentence")
 
     if errors:
         print("Catalog page-boundary check failed:", file=sys.stderr)

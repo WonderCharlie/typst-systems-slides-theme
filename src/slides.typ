@@ -2,7 +2,6 @@
 
 #import "@preview/touying:0.7.4": (
   cols,
-  components,
   config-common,
   config-page,
   config-store,
@@ -21,10 +20,12 @@
 #import "../themes/systems-slides-template/geometry.typ": systems-layout
 #import "../themes/systems-slides-template/marks.typ": validate-page-marks
 #import "media.typ": render-media
+#import "flow.typ": body-flow
+#import "layouts.typ": region, _layout-debug-container
 #import "runtime.typ": page-frame-config
-#import "layouts.typ": _layout-debug-container
 
 #let passthrough(..parts) = parts.pos().sum(default: none)
+#let _format-numbering = numbering
 
 /// 创建遵循 Touying 生命周期的标准正文页。
 /// 页面保留 Theme chrome、计数、分步展示和局部 page-frame 能力。
@@ -347,70 +348,124 @@
   )
 })
 
-/// 创建基于 Touying progressive outline 的目录页。
-/// 本接口集中控制目录深度、标题和条目垂直节奏。
+/// 创建样式统一的 Roadmap 页面；显式传入章节内容即可，不修改原生列表规则。
+/// 圆点或编号与正文共享字体、字号、字重和基线，当前项只改变强调色或字重。
 ///
-/// - config (dictionary): Touying 目录页配置，默认空字典，传给内部 slide。
-/// - level (auto, int): 目录查询层级，默认 `1`；`auto` 使用当前 Touying slide level，显式值应对应已有 heading。
-/// - title (none, content, function): 目录页标题，默认 `[Roadmap]`；`none` 隐藏 header。
-/// - spacing (length): 一级条目垂直节奏，默认 `26pt`；深层派生为三分之一，透传的 vspace 优先且值不得为负。
-/// - auto-layout (bool): 是否自动均分目录条目的垂直自由空间，默认 `false` 保持固定 spacing。
-///   开启时使用 fraction vspace，并禁止同时传入 `vspace`，以免出现两套间距来源。
-/// - setting (function): 目录内容转换函数，默认恒等；在 outline 生成后应用且必须返回 content。
-/// - args (arguments): 透传给 progressive outline 的参数；同名值覆盖本函数派生默认。
+/// - config (dictionary): Touying 页面配置，默认空字典；最后合并到普通 slide。
+/// - chapters (auto, array): Roadmap 条目；默认 `auto` 查询 `level` 对应的 outlined headings。
+///   显式数组适合 Starter 和独立 Deck，数组项可为原生 content 或字符串。
+/// - current (none, int): 当前章节的一基索引，默认 `none` 不强调任何项。
+///   显式值必须落在章节数组范围内，且不会改变条目字号或几何尺寸。
+/// - level (auto, int): `chapters: auto` 时查询的 heading 层级，默认 `1`；显式章节忽略此值。
+/// - title (none, content, function): 页面标题，默认 `[Roadmap]`；`none` 隐藏标题区域。
+/// - numbering (none, content, str, function): 标记形式，默认实心圆点；`"1."` 等字符串生成数字编号。
+///   函数接收一基索引并返回标记，`none` 隐藏标记但保留统一的正文起点。
+/// - size (length): 标记和正文的统一字号，默认 `32pt`，必须为正值。
+/// - weight (int, str): 标记和正文的统一字重，默认 `600`（semibold）。
+/// - spacing (auto, length, ratio, relative, fraction): 条目及上下外侧间距，默认 `auto`。
+///   自动布局时 `auto` 使用 `1fr` 均分正文自由空间；固定布局时使用 `26pt`。
+/// - auto-layout (bool): 是否让 Roadmap 使用正文余高均匀分布，默认 `true`。
+///   两种模式的第一项使用同一顶部锚点；自动模式只分配内部间距和底部余量。
+/// - current-style (dictionary): 当前项强调，默认主题紫色与 `700` 字重。
+///   只允许 `fill` 和 `weight`，防止强调改变字号、字体或基线并造成跳动。
+/// - setting (function): Roadmap 内容转换函数，默认恒等；在统一布局完成后应用。
 ///
 /// -> content
 #let outline-slide(
   config: (:),
+  chapters: auto,
+  current: none,
   level: 1,
   title: [Roadmap],
-  spacing: 26pt,
-  auto-layout: false,
+  numbering: [•],
+  size: 32pt,
+  weight: 600,
+  spacing: auto,
+  auto-layout: true,
+  current-style: (fill: purple, weight: 700),
   setting: body => body,
-  ..args,
 ) = slide(title: title, config: config, self => {
-  assert(type(auto-layout) == bool, message: "outline-slide.auto-layout must be a boolean")
-  let named = args.named()
+  assert(chapters == auto or type(chapters) == array, message: "outline-slide.chapters must be auto or an array")
+  if type(chapters) == array {
+    assert(chapters.len() > 0, message: "outline-slide.chapters must not be empty")
+  }
+  assert(current == none or type(current) == int, message: "outline-slide.current must be none or an integer")
   assert(
-    not auto-layout or "vspace" not in named,
-    message: "outline-slide: auto-layout and explicit vspace cannot be used together",
+    numbering == none or type(numbering) in (content, str, function),
+    message: "outline-slide.numbering must be none, content, a string, or a function",
   )
-  let indent = named.remove("indent", default: (0pt,))
-  if type(indent) != array { indent = (indent,) }
-  let vspace = named.remove(
-    "vspace",
-    default: if auto-layout {
-      (1fr, spacing / 3, spacing / 3, spacing / 3)
-    } else {
-      (spacing, spacing / 3, spacing / 3, spacing / 3)
-    },
+  assert(type(size) == length and size > 0pt, message: "outline-slide.size must be a positive length")
+  assert(type(weight) in (int, str), message: "outline-slide.weight must be an integer or string")
+  assert(
+    spacing == auto or type(spacing) in (length, ratio, relative, fraction),
+    message: "outline-slide.spacing must be auto, a length, ratio, relative length, or fraction",
   )
-  // The default marker deliberately matches the first-level Points marker.
-  // Explicit numbering remains an escape hatch for numbered agendas.
-  let numbered = named.remove("numbered", default: (true,))
-  let bullet-numbering(..numbers) = [•]
-  let numbering = named.remove("numbering", default: (bullet-numbering,))
-  let roadmap = components.custom-progressive-outline(
-    title: none,
-    depth: if level == auto { self.slide-level } else { level },
-    level: level,
-    indent: indent,
-    vspace: vspace,
-    numbered: numbered,
-    numbering: numbering,
-    ..args.pos(),
-    ..named,
+  assert(type(auto-layout) == bool, message: "outline-slide.auto-layout must be a boolean")
+  assert(
+    type(current-style) == dictionary,
+    message: "outline-slide.current-style must be a dictionary",
   )
-  setting(if auto-layout {
-    // `vspace: 1fr` distributes free height before each top-level entry; the
-    // trailing fraction makes the outer bottom space participate equally.
-    block(width: 100%, height: 100%, above: 0pt, below: 0pt, [
-      #roadmap
-      #v(1fr, weak: false)
-    ])
+  assert(
+    current-style.keys().all(key => key in ("fill", "weight")),
+    message: "outline-slide.current-style may only define fill and weight",
+  )
+  assert(type(setting) == function, message: "outline-slide.setting must be a function")
+
+  let marker-for(index) = if numbering == none {
+    []
+  } else if type(numbering) == str {
+    _format-numbering(numbering, index)
+  } else if type(numbering) == function {
+    numbering(index)
   } else {
-    roadmap
-  })
+    numbering
+  }
+
+  let render-roadmap(items) = {
+    assert(items.len() > 0, message: "outline-slide: no chapters are available to render")
+    assert(
+      current == none or (current >= 1 and current <= items.len()),
+      message: "outline-slide.current must be between 1 and " + repr(items.len()),
+    )
+    let rows = items.enumerate().map(entry => {
+      let (zero-index, body) = entry
+      let index = zero-index + 1
+      let style = if current == index {
+        (font: font-sans, size: size, weight: weight, fill: ink) + current-style
+      } else {
+        (font: font-sans, size: size, weight: weight, fill: ink)
+      }
+      region(grid(
+        columns: (48pt, 1fr),
+        gutter: 16pt,
+        align: (right + top, left + top),
+        text(..style, marker-for(index)),
+        text(..style, body),
+      ))
+    })
+    let resolved-spacing = if spacing == auto {
+      if auto-layout { 1fr } else { 26pt }
+    } else {
+      spacing
+    }
+    let roadmap = body-flow(
+      rows,
+      rows: (auto,) * rows.len(),
+      gutter: resolved-spacing,
+      outer-gutter: if auto-layout { (0pt, resolved-spacing) } else { 0pt },
+    )
+    setting(roadmap)
+  }
+
+  if chapters == auto {
+    context {
+      let depth = if level == auto { self.slide-level } else { level }
+      let headings = query(heading.where(level: depth, outlined: true))
+      render-roadmap(headings.map(item => link(item.location(), item.body)))
+    }
+  } else {
+    render-roadmap(chapters)
+  }
 })
 
 /// 创建显示当前 heading 与可选说明的章节分隔页。

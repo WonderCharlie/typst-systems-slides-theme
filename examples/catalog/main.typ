@@ -1,4 +1,4 @@
-// A 28-scene, 45-page executable specification of the public systems-slides-template
+// A 30-scene, 47-page executable specification of the public systems-slides-template
 // Theme. All paper claims and measurements are synthetic.
 
 #import "globals.typ": catalog-theme

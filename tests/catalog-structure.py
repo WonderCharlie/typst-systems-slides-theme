@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Keep the Catalog a 28-scene public-API specification with native content."""
+"""Keep the Catalog a 30-scene public-API specification with native content."""
 
 from __future__ import annotations
 
@@ -35,8 +35,10 @@ def main() -> int:
             errors.append(f"main.typ does not include {name}")
 
     logical = source.count("#slide(") + source.count("#title-slide(") + source.count("#outline-slide(")
-    if logical != 28 or source.count("#slide(") != 26:
-        errors.append(f"Catalog must define 28 logical scenes (26 ordinary + cover + roadmap); found {logical}")
+    if logical != 30 or source.count("#slide(") != 26 or source.count("#outline-slide(") != 3:
+        errors.append(
+            f"Catalog must define 30 logical scenes (26 ordinary + cover + three Roadmaps); found {logical}"
+        )
     if source.count("repeat: 3") != 8 or source.count("repeat: 2") != 1:
         errors.append("Catalog must use eight 3-state and one 2-state lifecycle sequences")
 
@@ -52,13 +54,13 @@ def main() -> int:
         for term in header_terms:
             if term not in header:
                 errors.append(f"{section.name} header does not declare {term}")
-        if '#import "@local/systems-slides-template:0.6.0"' not in section_source:
+        if '#import "@local/systems-slides-template:0.6.1"' not in section_source:
             errors.append(f"{section.name} must import the installed public package directly")
         for forbidden in ('../../lib.typ', '/src/', '/themes/', 'compat.typ'):
             if forbidden in section_source:
                 errors.append(f"{section.name} imports forbidden internal path {forbidden!r}")
 
-    if '#import "@local/systems-slides-template:0.6.0": systems-slides-theme' not in globals_source:
+    if '#import "@local/systems-slides-template:0.6.1": systems-slides-theme' not in globals_source:
         errors.append("globals.typ must obtain Theme configuration from the installed public package")
     for leaked in ("stage-box", "body-flow", "column-split", "points", "table"):
         if leaked in globals_source:
@@ -118,7 +120,7 @@ def main() -> int:
         for error in errors:
             print(f"- {error}", file=sys.stderr)
         return 1
-    print("Catalog structure check passed: 28 scenes, seven capability sections, native technical content, and public-package-only imports.")
+    print("Catalog structure check passed: 30 scenes, seven capability sections, native technical content, and public-package-only imports.")
     return 0
 
 

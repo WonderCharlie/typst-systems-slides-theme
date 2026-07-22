@@ -10,7 +10,7 @@ lib.typ                     唯一公共入口
 src/                        页面、布局、flow、Points、容器和 runtime facade
 themes/systems-slides-template/       Theme、master、视觉 token、profile 与字体源
 template/                   typst init 的 Starter
-examples/catalog/           稳定公共能力教学（28 个逻辑场景 / 45 个物理页面）
+examples/catalog/           稳定公共能力教学（30 个逻辑场景 / 47 个物理页面）
 tests/                      小型 Fixture、边界与安装检查
 packaging/                  安装快照 allowlist
 tools/local-package.py      本地打包、安装、替换与卸载
@@ -101,7 +101,7 @@ make install-check
 普通源码注释只解释原因和不变量，不记录已完成迁移。
 
 修改 Guide 时运行 `make guide-check`。该目标验证 13 个章节、27 个稳定公共绑定的可发现性、
-28/45 Catalog 映射、公共导入边界，并在禁用系统/内嵌字体的条件下编译五页独立示例。
+30/47 Catalog 映射、公共导入边界，并在禁用系统/内嵌字体的条件下编译五页独立示例。
 Guide 不复制完整参数表；公共签名变化仍以源码 `///` 和 Tinymist 检查为准。
 
 ## 修改后的最低验证
