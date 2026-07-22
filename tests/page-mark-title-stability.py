@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Prove a page mark cannot move otherwise identical title pixels."""
+"""Prove optional title chrome is stable and vertically centered."""
 
 from __future__ import annotations
 
@@ -13,6 +13,8 @@ from pathlib import Path
 
 DPI = 288
 SCALE = DPI // 72
+PRIMARY = (111, 47, 159)
+TITLE_RULE_Y_PT = 68.63
 
 
 def read_ppm(path: Path) -> tuple[int, int, bytes]:
@@ -34,6 +36,26 @@ def crop(image: tuple[int, int, bytes], box: tuple[int, int, int, int]) -> bytes
         pixels[(y * width + left) * 3:(y * width + right) * 3]
         for y in range(top, bottom)
     )
+
+
+def color_bounds(
+    image: tuple[int, int, bytes],
+    color: tuple[int, int, int],
+    box: tuple[int, int, int, int],
+) -> tuple[int, int, int, int]:
+    width, _, pixels = image
+    left, top, right, bottom = box
+    xs: list[int] = []
+    ys: list[int] = []
+    for y in range(top, bottom):
+        for x in range(left, right):
+            offset = (y * width + x) * 3
+            if tuple(pixels[offset:offset + 3]) == color:
+                xs.append(x)
+                ys.append(y)
+    if not xs:
+        raise RuntimeError(f"color {color} is absent from {box}")
+    return min(xs), min(ys), max(xs), max(ys)
 
 
 def title_box(pdf: Path, page: int) -> tuple[float, float, float, float]:
@@ -85,12 +107,33 @@ def main() -> int:
             if crop(image, title_crop) != reference:
                 errors.append(f"title pixels changed after adding mark/progress on page {page}")
 
+        progress_crop = (700 * SCALE, 0, 960 * SCALE, round(TITLE_RULE_Y_PT * SCALE))
+        expected_center = TITLE_RULE_Y_PT * SCALE / 2
+        progress_centers = []
+        for page in (3, 4):
+            _, top, _, bottom = color_bounds(images[page - 1], PRIMARY, progress_crop)
+            center = (top + bottom) / 2
+            progress_centers.append(center)
+            if abs(center - expected_center) > 1:
+                errors.append(
+                    f"section progress on page {page} is not vertically centered: "
+                    f"center={center}px, expected={expected_center}px"
+                )
+        if abs(progress_centers[0] - progress_centers[1]) > 1:
+            errors.append(
+                "section progress moved vertically when combined with a page mark: "
+                f"{progress_centers}"
+            )
+
     if errors:
         print("Page-mark title stability check failed:", file=sys.stderr)
         for error in errors:
             print(f"- {error}", file=sys.stderr)
         return 1
-    print("Page-mark title stability check passed: marks and section progress do not move identical title bbox or pixels.")
+    print(
+        "Page-mark title stability check passed: marks and section progress do not move "
+        "identical title pixels, and progress dots stay centered in the title region."
+    )
     return 0
 
 

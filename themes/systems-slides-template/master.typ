@@ -129,16 +129,28 @@
     )
   } }
   let progress-content = if show-progress { section-progress-dots(self) } else { none }
-  let end-content = if progress-content == none {
+  // Like page marks, geometric progress dots reserve horizontal space in the
+  // title row but are positioned visibly against the complete title region.
+  // The text-only row optical correction must not move circles vertically.
+  let progress-slot = if progress-content == none { none } else { context {
+    let natural-size = measure(progress-content)
+    block(
+      width: natural-size.width,
+      height: systems-layout.title.size,
+      above: 0pt,
+      below: 0pt,
+    )
+  } }
+  let end-content = if progress-slot == none {
     mark-slot
   } else if mark-slot == none {
-    progress-content
+    progress-slot
   } else {
     grid(
       columns: (auto, auto),
       gutter: 12pt,
       align: right + horizon,
-      progress-content,
+      progress-slot,
       mark-slot,
     )
   }
@@ -193,23 +205,44 @@
     ),
   )
 
-  if mark-content == none {
+  if mark-content == none and progress-content == none {
     header-base
   } else {
     context {
-      let mark-size = measure(mark-content)
-      let mark-y = (systems-layout.title.rule-y - mark-size.height) / 2
-      assert(
-        mark-y >= 0pt,
-        message: "page-mark is taller than the available title region; reduce page-mark.height",
-      )
+      let mark-size = if mark-content == none { none } else { measure(mark-content) }
+      let progress-size = if progress-content == none { none } else { measure(progress-content) }
       header-base
-      place(
-        top + right,
-        dx: -systems-layout.title.mark-right-inset,
-        dy: mark-y,
-        mark-content,
-      )
+      if progress-content != none {
+        let progress-y = (systems-layout.title.rule-y - progress-size.height) / 2
+        let progress-right-inset = systems-layout.title.mark-right-inset + if mark-size == none {
+          0pt
+        } else {
+          mark-size.width + 12pt
+        }
+        assert(
+          progress-y >= 0pt,
+          message: "section progress is taller than the available title region",
+        )
+        place(
+          top + right,
+          dx: -progress-right-inset,
+          dy: progress-y,
+          progress-content,
+        )
+      }
+      if mark-content != none {
+        let mark-y = (systems-layout.title.rule-y - mark-size.height) / 2
+        assert(
+          mark-y >= 0pt,
+          message: "page-mark is taller than the available title region; reduce page-mark.height",
+        )
+        place(
+          top + right,
+          dx: -systems-layout.title.mark-right-inset,
+          dy: mark-y,
+          mark-content,
+        )
+      }
     }
   }
 }
