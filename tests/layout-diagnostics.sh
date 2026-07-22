@@ -107,6 +107,9 @@ expect_failure \
   "overlay-body-area" \
   'page-frame "invalid-overlay": overlay must cover the full page; omit area or use area: "page"'
 expect_failure \
+  "margin-with-chrome" \
+  'page-frame "moving-chrome": margin can move fixed slide chrome; use body-inset while a header or Footer is visible'
+expect_failure \
   "media-overflow" \
   'region "oversized-media": content needs 100pt x 60pt, but the region provides 100pt x 50pt; use fit: "contain", overflow: "clip", or increase the track'
 

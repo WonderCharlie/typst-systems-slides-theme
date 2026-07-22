@@ -19,7 +19,7 @@
   ),
   chrome: false,
   section-progress: false,
-  margin: (left: 50pt, right: 50pt, top: 94pt, bottom: 48pt),
+  body-inset: (left: 50pt, right: 50pt, top: 26pt, bottom: 8pt),
   fill: rgb("fbfbfe"),
   width: 960pt,
   height: 540pt,
@@ -56,6 +56,7 @@
 #assert(layered-frame.height == 540pt)
 #assert(layered-frame.chrome == true)
 #assert(layered-frame.section-progress == false)
+#assert(layered-frame.body-inset == (left: 50pt, right: 50pt, top: 26pt, bottom: 8pt))
 #assert(layered-frame.overlay.area == "page")
 #assert(layered-frame.foreground.area == "body")
 #assert(layered-frame.detect-overflow == true)

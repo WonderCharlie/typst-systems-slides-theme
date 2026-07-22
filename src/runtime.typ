@@ -16,6 +16,7 @@
   "section-progress",
   "header",
   "footer",
+  "body-inset",
   "margin",
   "fill",
   "width",

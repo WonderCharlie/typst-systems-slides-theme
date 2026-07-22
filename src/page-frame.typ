@@ -15,6 +15,7 @@
   section-progress: auto,
   header: auto,
   footer: auto,
+  body-inset: auto,
   margin: auto,
   fill: auto,
   width: auto,
@@ -141,8 +142,11 @@
 ///   `auto` 继承，`none` 隐藏，显式值高于 chrome 和 slide title。
 /// - footer (content, function, none, auto): 页脚或状态回调；
 ///   `auto` 继承，`none` 隐藏，显式值高于 chrome 和 Theme footer。
+/// - body-inset (length, ratio, relative, dictionary, auto): Theme 正文区域的附加内缩；
+///   默认 `auto` 不增加内缩，不改变标题和 Footer；字典键遵循 Typst block inset。
 /// - margin (length, ratio, relative, dictionary, auto): page margin；
-///   `auto` 继承，字典必须遵循 Typst page.margin 约束。
+///   默认 `auto`；仅适用于完全隐藏 chrome 的全画布页面。
+///   保留标题或 Footer 时应使用 `body-inset`，避免移动固定 chrome。
 /// - fill (color, gradient, tiling, none, auto): 页面底层 paint；`auto` 继承，`none` 透明；图形内容应放在 background。
 /// - width (length, auto): 页面物理宽度；`auto` 继承，显式值必须为正且会影响 chrome/presenter view。
 /// - height (length, auto): 页面物理高度；`auto` 继承，显式值必须为正且会影响 chrome/presenter view。
@@ -167,7 +171,8 @@
   header: auto,
   footer: auto,
 
-  // Physical page box.
+  // Body geometry and physical page box.
+  body-inset: auto,
   margin: auto,
   fill: auto,
   width: auto,
@@ -203,6 +208,7 @@
     section-progress: _resolved(inherited, "section-progress", section-progress),
     header: _resolved(inherited, "header", header),
     footer: _resolved(inherited, "footer", footer),
+    body-inset: _resolved(inherited, "body-inset", body-inset),
     margin: _resolved(inherited, "margin", margin),
     fill: _resolved(inherited, "fill", fill),
     width: _resolved(inherited, "width", width),
@@ -242,9 +248,22 @@
     )
   }
   assert(
+    _is-inset(values.body-inset),
+    message: owner + ": body-inset must be a length, ratio, relative value, dictionary, or auto",
+  )
+  assert(
     _is-page-spacing(values.margin),
     message: owner + ": margin must be a length, ratio, relative value, dictionary, or auto",
   )
+  if values.margin != auto {
+    let no_explicit_chrome = values.header in (auto, none) and values.footer in (auto, none)
+    let chrome_hidden = values.chrome == false and no_explicit_chrome
+    let slots_hidden = values.header == none and values.footer == none
+    assert(
+      chrome_hidden or slots_hidden,
+      message: owner + ": margin can move fixed slide chrome; use body-inset while a header or Footer is visible",
+    )
+  }
   assert(
     values.fill in (auto, none) or type(values.fill) in (color, gradient, tiling),
     message: owner + ": fill must be a color, gradient, tiling, none, or auto",
@@ -284,6 +303,7 @@
     section-progress: values.section-progress,
     header: values.header,
     footer: values.footer,
+    body-inset: values.body-inset,
     margin: values.margin,
     fill: values.fill,
     width: values.width,

@@ -1,5 +1,10 @@
 # Changelog
 
+## Unreleased
+
+- 为 `page-frame` 增加只作用于正文的 `body-inset`，并禁止可见 chrome 页面通过物理
+  `margin` 移动标题或 Footer；增加正文内缩下 Footer 贴底稳定性测试。
+
 ## 0.5.0 - 2026-07-22
 
 - Footer Logo 改用与标题、日期、页码一致的全高度槽位垂直居中，移除固定 `logo-dy`；

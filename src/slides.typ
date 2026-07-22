@@ -105,7 +105,7 @@
     set text(font: font-sans, size: 24pt, fill: ink)
     show: setting
     let standard-body = title != none and (
-      frame == auto or frame.margin == auto
+      frame == auto or (frame.chrome != false and frame.margin == auto)
     )
     let flowed = if standard-body {
       pad(top: systems-layout.body.content-inset-top, body)
@@ -113,7 +113,20 @@
       body
     }
     let aligned = if align == auto { flowed } else { std.align(align, flowed) }
-    _layout-debug-container(aligned, "theme-body", "Theme body")
+    let body-inset = if frame == auto { auto } else { frame.body-inset }
+    let inset-body = if body-inset == auto {
+      aligned
+    } else {
+      block(
+        width: 100%,
+        height: 100%,
+        above: 0pt,
+        below: 0pt,
+        inset: body-inset,
+        aligned,
+      )
+    }
+    _layout-debug-container(inset-body, "theme-body", "Theme body")
   }
   touying-slide(
     self: effective,

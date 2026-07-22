@@ -193,6 +193,12 @@
     name: "invalid-overlay",
     overlay: page-layer([mask], area: "body"),
   )
+} else if selected == "margin-with-chrome" {
+  page-frame(
+    name: "moving-chrome",
+    chrome: true,
+    margin: 32pt,
+  )
 } else if selected == "media-overflow" {
   row-split(
     (

@@ -10,7 +10,7 @@ background、overlay 或 foreground 内容。
 ```typst
 #slide(
   title: none,
-  config: page-frame(
+  frame: page-frame(
     chrome: false,
     fill: typography.tone-deep,
     background: page-layer(background-art, area: "page"),
@@ -25,8 +25,18 @@ overlay 必须覆盖整页，包括标题、正文、page mark 和 Footer；back
 `area: "page"` 或 `"body"`。页面层不占正文空间，也不代表 Question、Insight、Goal 或
 Conclusion。叙事语义由 Deck 的标题和内容表达。
 
-`chrome: false` 隐藏普通 header/footer；counted 与页面尺寸、margin、fill、overflow
-detection 是页面生命周期选择。普通页面不应重设这些值。
+保留标题或 Footer 时，使用 `body-inset` 调整正文留白；它只作用于 Theme 正文区域，
+不会移动固定 chrome。物理 `margin` 仅用于 `chrome: false` 的全画布页面，Theme 会拒绝
+在可见 chrome 下使用它，避免 Footer 与页面底边之间出现缝隙。
+
+```typst
+#slide(
+  frame: page-frame(body-inset: (left: 3%, right: 3%, top: 12%, bottom: 8%)),
+)[正文内容]
+```
+
+`chrome: false` 隐藏普通 header/footer；counted、fill 和 overflow detection 是页面生命周期
+选择。普通页面不应重设物理页面尺寸。
 
 ## Page mark
 

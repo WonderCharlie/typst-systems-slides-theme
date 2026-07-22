@@ -39,7 +39,7 @@ EXPECTED_PARAMS: dict[str, dict[str, tuple[str, ...]]] = {
         "page-layer": ("body", "name", "area", "align", "inset"),
         "page-frame": (
             "base", "name", "background", "overlay", "foreground", "chrome", "section-progress",
-            "header", "footer", "margin", "fill", "width", "height", "header-ascent",
+            "header", "footer", "body-inset", "margin", "fill", "width", "height", "header-ascent",
             "footer-descent", "clip", "detect-overflow",
         ),
     },

@@ -1,7 +1,7 @@
 // Footer geometry fixture: the symmetric white rectangle exposes the visible
 // center of the complete logo slot without depending on a branded SVG viewBox.
 
-#import "../lib.typ": slide, systems-slides-theme
+#import "../lib.typ": page-frame, slide, systems-slides-theme
 
 #show: systems-slides-theme.with(
   title: [FOOTER CONTRACT TITLE],
@@ -14,4 +14,13 @@
   section-slides: false,
 )
 
-#slide(title: [Footer Geometry Contract])[Footer geometry contract fixture.]
+#slide(title: [Footer Geometry Contract], counted: false)[Footer geometry contract fixture.]
+
+#slide(
+  title: [Footer Geometry Contract],
+  frame: page-frame(
+    name: "inset body with fixed Footer",
+    body-inset: (left: 12%, right: 8%, top: 18%, bottom: 10%),
+  ),
+  counted: false,
+)[Footer geometry contract fixture.]
