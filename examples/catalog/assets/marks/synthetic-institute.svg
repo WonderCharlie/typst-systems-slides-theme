@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 330 100">
+  <rect x="2" y="2" width="326" height="96" rx="16" fill="#f6f3fa" stroke="#755a9c" stroke-width="4"/>
+  <path d="M35 70V32l31-17 31 17v38M49 70V42h34v28" fill="none" stroke="#452a6f" stroke-width="6"/>
+  <text x="116" y="45" font-family="Poppins,sans-serif" font-size="20" font-weight="700" fill="#452a6f">RELAY SYSTEMS LAB</text>
+  <text x="116" y="70" font-family="Poppins,sans-serif" font-size="15" fill="#666">Synthetic Research Institute</text>
+</svg>

@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 190">
+  <rect width="500" height="190" rx="12" fill="#faf9fb"/>
+  <g font-family="Poppins,sans-serif" font-size="15" fill="#444"><text x="18" y="35">CPU</text><text x="18" y="91">I/O</text><text x="18" y="147">Wait</text></g>
+  <rect x="78" y="16" width="366" height="30" rx="5" fill="#77a6d8"/><rect x="138" y="72" width="194" height="30" rx="5" fill="#755a9c"/><rect x="332" y="72" width="82" height="30" rx="5" fill="#53a27c"/>
+  <rect x="414" y="128" width="30" height="30" rx="5" fill="#e8b458"/>
+  <g font-family="Poppins,sans-serif" font-size="13" fill="#fff" text-anchor="middle"><text x="261" y="37">independent compute continues</text><text x="235" y="93">prefetched critical I/O</text><text x="373" y="93">commit</text></g>
+</svg>

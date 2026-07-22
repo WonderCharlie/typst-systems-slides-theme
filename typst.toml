@@ -1,0 +1,32 @@
+[package]
+name = "systems-slides-template"
+version = "0.4.0"
+entrypoint = "lib.typ"
+authors = ["Systems Slides Template Contributors"]
+license = "MIT"
+description = "A content-agnostic Typst and Touying theme for systems-research presentations."
+keywords = ["slides", "presentation", "systems-research", "touying", "theme", "template"]
+categories = ["presentation"]
+compiler = "0.15.0"
+exclude = [
+  "/.gitattributes",
+  "/.gitignore",
+  "/.vscode/",
+  "/build/",
+  "/CHANGELOG.md",
+  "/docs/",
+  "/examples/",
+  "/tests/",
+  "/tmp/",
+  "/tools/",
+  "/Makefile",
+  "/packaging/",
+  "/README.md",
+  "**/build/",
+  "**/*.pdfpc",
+]
+
+[template]
+path = "template"
+entrypoint = "main.typ"
+thumbnail = "thumbnail.png"

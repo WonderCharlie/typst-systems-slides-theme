@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 820 330">
+  <rect width="820" height="330" rx="14" fill="#faf9fb"/>
+  <g font-family="Poppins,sans-serif" text-anchor="middle">
+    <rect x="35" y="55" width="210" height="220" rx="16" fill="#fff" stroke="#755a9c" stroke-width="3"/>
+    <rect x="305" y="55" width="210" height="220" rx="16" fill="#fff" stroke="#755a9c" stroke-width="3"/>
+    <rect x="575" y="55" width="210" height="220" rx="16" fill="#fff" stroke="#755a9c" stroke-width="3"/>
+    <g fill="#452a6f" font-weight="700" font-size="20"><text x="140" y="88">Compute Node</text><text x="410" y="88">100 Gb/s Fabric</text><text x="680" y="88">Storage Targets</text></g>
+    <g fill="#ece7f3" stroke="#755a9c" stroke-width="2">
+      <rect x="68" y="115" width="144" height="48" rx="8"/><rect x="68" y="183" width="144" height="48" rx="8"/>
+      <rect x="338" y="125" width="144" height="96" rx="8"/>
+      <rect x="608" y="115" width="144" height="48" rx="8"/><rect x="608" y="183" width="144" height="48" rx="8"/>
+    </g>
+    <g fill="#333" font-size="16"><text x="140" y="145">Application</text><text x="140" y="213">Relay Scheduler</text><text x="410" y="178">Shared Network</text><text x="680" y="145">NVMe-oF 0</text><text x="680" y="213">NVMe-oF 1</text></g>
+  </g>
+  <g stroke="#755a9c" stroke-width="5"><path d="M245 165H305"/><path d="M515 165H575"/></g>
+  <text x="410" y="310" text-anchor="middle" font-family="Poppins,sans-serif" font-size="16" fill="#666">Relay changes host scheduling only; devices and applications retain their interfaces.</text>
+</svg>

@@ -1,0 +1,94 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "package: stage development snapshot",
+      "type": "shell",
+      "command": "make",
+      "args": ["-C", "${workspaceFolder}", "package-stage"],
+      "problemMatcher": []
+    },
+    {
+      "label": "starter: build",
+      "type": "shell",
+      "command": "make",
+      "args": ["-C", "${workspaceFolder}", "starter"],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "starter: build and verify",
+      "type": "shell",
+      "command": "make",
+      "args": ["-C", "${workspaceFolder}", "starter-verify"],
+      "group": "test",
+      "problemMatcher": []
+    },
+    {
+      "label": "catalog: build",
+      "type": "shell",
+      "command": "make",
+      "args": ["-C", "${workspaceFolder}", "catalog"],
+      "group": "build",
+      "problemMatcher": []
+    },
+    {
+      "label": "catalog: build and verify",
+      "type": "shell",
+      "command": "make",
+      "args": ["-C", "${workspaceFolder}", "catalog-verify"],
+      "group": "test",
+      "problemMatcher": []
+    },
+    {
+      "label": "validate: package and slides",
+      "type": "shell",
+      "command": "make",
+      "args": ["-C", "${workspaceFolder}", "validate"],
+      "group": "test",
+      "problemMatcher": []
+    },
+    {
+      "label": "package: install locally",
+      "type": "shell",
+      "command": "make",
+      "args": ["-C", "${workspaceFolder}", "install"],
+      "problemMatcher": []
+    },
+    {
+      "label": "package: verify local installation",
+      "type": "shell",
+      "command": "make",
+      "args": ["-C", "${workspaceFolder}", "install-check"],
+      "group": "test",
+      "problemMatcher": []
+    },
+    {
+      "label": "Tinymist: verify documentation statically",
+      "type": "shell",
+      "command": "make",
+      "args": ["-C", "${workspaceFolder}", "tinymist-docs-static-check"],
+      "group": "test",
+      "problemMatcher": []
+    },
+    {
+      "label": "Tinymist: verify development package hover",
+      "type": "shell",
+      "command": "make",
+      "args": ["-C", "${workspaceFolder}", "tinymist-docs-check"],
+      "group": "test",
+      "problemMatcher": []
+    },
+    {
+      "label": "Tinymist: verify installed package hover",
+      "type": "shell",
+      "command": "make",
+      "args": ["-C", "${workspaceFolder}", "tinymist-installed-docs-check"],
+      "group": "test",
+      "problemMatcher": []
+    }
+  ]
+}

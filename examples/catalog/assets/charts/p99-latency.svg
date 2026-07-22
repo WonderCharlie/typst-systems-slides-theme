@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 820 270">
+  <rect width="820" height="270" rx="12" fill="#fff"/>
+  <g stroke="#dedbe3" stroke-width="1">
+    <path d="M72 42H790M72 88H790M72 134H790M72 180H790M72 226H790"/>
+  </g>
+  <g font-family="Poppins,sans-serif" font-size="15" fill="#555">
+    <text x="25" y="232">0</text><text x="17" y="186">20</text><text x="17" y="140">40</text><text x="17" y="94">60</text><text x="17" y="48">80</text>
+    <text x="122" y="253">QD 8</text><text x="298" y="253">QD 16</text><text x="474" y="253">QD 32</text><text x="650" y="253">QD 64</text>
+    <text x="6" y="20" font-weight="600">P99 latency (ms)</text>
+  </g>
+  <g fill="#b9b2c5">
+    <rect x="111" y="148" width="48" height="78" rx="4"/><rect x="287" y="119" width="48" height="107" rx="4"/>
+    <rect x="463" y="76" width="48" height="150" rx="4"/><rect x="639" y="43" width="48" height="183" rx="4"/>
+  </g>
+  <g fill="#755a9c">
+    <rect x="165" y="165" width="48" height="61" rx="4"/><rect x="341" y="143" width="48" height="83" rx="4"/>
+    <rect x="517" y="122" width="48" height="104" rx="4"/><rect x="693" y="100" width="48" height="126" rx="4"/>
+  </g>
+  <g font-family="Poppins,sans-serif" font-size="14" fill="#333">
+    <rect x="610" y="10" width="15" height="15" fill="#b9b2c5"/><text x="632" y="23">Arrival order</text>
+    <rect x="715" y="10" width="15" height="15" fill="#755a9c"/><text x="737" y="23">Relay</text>
+  </g>
+</svg>

@@ -1,0 +1,22 @@
+{
+  "folders": [
+    {
+      "path": ".."
+    }
+  ],
+  "settings": {
+    "[typst]": {
+      "editor.hover.enabled": true,
+      "editor.parameterHints.enabled": true
+    },
+    "tinymist.typingContinueCommentsOnNewline": true,
+    "tinymist.onEnterEvent": true,
+    "tinymist.renderDocs": "enable",
+    "tinymist.completion.triggerOnSnippetPlaceholders": true,
+    "tinymist.typstExtraArgs": [
+      "--ignore-embedded-fonts",
+      "--package-path",
+      "${workspaceFolder}/build/packages"
+    ]
+  }
+}

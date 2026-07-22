@@ -1,0 +1,11 @@
+# Reproducible build outputs.
+build/
+*.pdfpc
+
+# Local editor and operating-system caches.
+.typst-cache/
+.tinymist/
+.DS_Store
+*.swp
+*.swo
+*~

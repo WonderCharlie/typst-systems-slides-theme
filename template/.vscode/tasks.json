@@ -1,0 +1,47 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "slides: build PDF",
+      "type": "shell",
+      "command": "make",
+      "args": ["-C", "${workspaceFolder}", "pdf"],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "slides: export pdfpc notes",
+      "type": "shell",
+      "command": "make",
+      "args": ["-C", "${workspaceFolder}", "pdfpc"],
+      "group": "build",
+      "problemMatcher": []
+    },
+    {
+      "label": "slides: build layout debug PDF",
+      "type": "shell",
+      "command": "make",
+      "args": ["-C", "${workspaceFolder}", "debug"],
+      "group": "build",
+      "problemMatcher": []
+    },
+    {
+      "label": "slides: watch PDF",
+      "type": "shell",
+      "command": "make",
+      "args": ["-C", "${workspaceFolder}", "watch"],
+      "isBackground": true,
+      "problemMatcher": []
+    },
+    {
+      "label": "slides: clean generated files",
+      "type": "shell",
+      "command": "make",
+      "args": ["-C", "${workspaceFolder}", "clean"],
+      "problemMatcher": []
+    }
+  ]
+}

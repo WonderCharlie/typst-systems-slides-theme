@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1060 230">
+  <defs><marker id="e" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0 0L9 3 0 6z" fill="#755a9c"/></marker></defs>
+  <rect width="1060" height="230" rx="14" fill="#f8f7fa"/>
+  <g font-family="Poppins,sans-serif" text-anchor="middle" font-size="17" font-weight="700" fill="#452a6f">
+    <g fill="#fff" stroke="#755a9c" stroke-width="3">
+      <rect x="24" y="72" width="160" height="86" rx="12"/><rect x="232" y="72" width="160" height="86" rx="12"/>
+      <rect x="440" y="72" width="160" height="86" rx="12"/><rect x="648" y="72" width="160" height="86" rx="12"/>
+      <rect x="856" y="72" width="180" height="86" rx="12"/>
+    </g>
+    <text x="104" y="111">Application</text><text x="104" y="134">Runtime</text>
+    <text x="312" y="111">Dependency</text><text x="312" y="134">Tracker</text>
+    <text x="520" y="111">Relay</text><text x="520" y="134">Scheduler</text>
+    <text x="728" y="123">Network</text><text x="946" y="111">Remote</text><text x="946" y="134">Storage</text>
+  </g>
+  <g stroke="#755a9c" stroke-width="4" marker-end="url(#e)"><path d="M184 115H232"/><path d="M392 115H440"/><path d="M600 115H648"/><path d="M808 115H856"/></g>
+  <text x="530" y="205" text-anchor="middle" font-family="Poppins,sans-serif" font-size="17" fill="#666">Critical dependencies stay visible; independent work overlaps network delay.</text>
+</svg>

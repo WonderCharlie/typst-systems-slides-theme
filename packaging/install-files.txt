@@ -1,0 +1,9 @@
+# 每行是相对于仓库根目录的正式本地包输入。
+# 目录会递归复制；未列出的示例、测试、工具和生成物不会进入安装目录。
+typst.toml
+lib.typ
+LICENSE
+thumbnail.png
+src
+themes
+template

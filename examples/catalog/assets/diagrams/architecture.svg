@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 820 280">
+  <defs><marker id="a" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0 0L9 3 0 6z" fill="#755a9c"/></marker></defs>
+  <rect width="820" height="280" rx="14" fill="#f8f7fa"/>
+  <g font-family="Poppins,sans-serif" text-anchor="middle">
+    <g fill="#fff" stroke="#755a9c" stroke-width="3">
+      <rect x="35" y="85" width="155" height="100" rx="12"/><rect x="240" y="42" width="170" height="80" rx="12"/>
+      <rect x="240" y="158" width="170" height="80" rx="12"/><rect x="460" y="85" width="150" height="100" rx="12"/>
+      <rect x="660" y="85" width="125" height="100" rx="12"/>
+    </g>
+    <g fill="#452a6f" font-weight="700" font-size="18">
+      <text x="112" y="126">Application</text><text x="112" y="151">Runtime</text>
+      <text x="325" y="76">Dependency</text><text x="325" y="101">Tracker</text>
+      <text x="325" y="192">Ready-Work</text><text x="325" y="217">Queue</text>
+      <text x="535" y="126">Relay</text><text x="535" y="151">Scheduler</text>
+      <text x="722" y="126">Remote</text><text x="722" y="151">Storage</text>
+    </g>
+  </g>
+  <g fill="none" stroke="#755a9c" stroke-width="4" marker-end="url(#a)">
+    <path d="M190 120C215 120 214 82 240 82"/><path d="M410 82C438 82 432 120 460 120"/>
+    <path d="M190 150C215 150 214 198 240 198"/><path d="M410 198C438 198 432 150 460 150"/><path d="M610 135H660"/>
+  </g>
+  <text x="410" y="263" text-anchor="middle" font-family="Poppins,sans-serif" font-size="16" fill="#666">Dependency state selects what may overlap and what must remain ordered.</text>
+</svg>

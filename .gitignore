@@ -1,0 +1,16 @@
+# Typst and presentation outputs
+**/build/
+/tmp/
+*.pdfpc
+
+# Test and language caches
+__pycache__/
+.pytest_cache/
+.typst-cache/
+.tinymist/
+
+# Editor and operating-system noise
+.DS_Store
+*.swp
+*.swo
+*~

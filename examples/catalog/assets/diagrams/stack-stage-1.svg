@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 820 330">
+  <rect width="820" height="330" fill="#fff"/>
+  <g font-family="Poppins,sans-serif" text-anchor="middle">
+    <rect x="120" y="220" width="580" height="82" rx="12" fill="#eeeaf4" stroke="#755a9c" stroke-width="4"/>
+    <text x="410" y="253" font-size="22" font-weight="700" fill="#452a6f">Remote Storage Device</text>
+    <text x="410" y="280" font-size="15" fill="#666">NVMe-oF target · unchanged interface</text>
+  </g>
+  <g fill="#53a27c"><circle cx="155" cy="281" r="7"/><circle cx="178" cy="281" r="7"/></g>
+  <g stroke="#755a9c" stroke-width="5" stroke-linecap="round"><path d="M625 277h35"/><path d="M625 291h35"/></g>
+</svg>

@@ -1,0 +1,37 @@
+{
+  "[typst]": {
+    "editor.defaultFormatter": "myriad-dreamin.tinymist",
+    "editor.formatOnSave": true,
+    "editor.hover.enabled": true,
+    "editor.parameterHints.enabled": true
+  },
+
+  "tinymist.rootPath": "${workspaceFolder}",
+  "tinymist.projectResolution": "lockDatabase",
+
+  "tinymist.fontPaths": [
+    "${workspaceFolder}/themes/systems-slides-template/assets/fonts/poppins",
+    "${workspaceFolder}/themes/systems-slides-template/assets/fonts/source-code-pro",
+    "${workspaceFolder}/themes/systems-slides-template/assets/fonts/new-computer-modern",
+    "${workspaceFolder}/themes/systems-slides-template/assets/fonts/libertinus"
+  ],
+  "tinymist.systemFonts": false,
+  "tinymist.typstExtraArgs": ["--ignore-embedded-fonts"],
+
+  "tinymist.preview.refresh": "onType",
+  "tinymist.preview.scrollSync": "onSelectionChange",
+  "tinymist.preview.cursorIndicator": true,
+  "tinymist.preview.partialRendering": true,
+  "tinymist.preview.invertColors": "never",
+
+  "tinymist.exportPdf": "never",
+
+  "tinymist.typingContinueCommentsOnNewline": true,
+  "tinymist.onEnterEvent": true,
+  "tinymist.renderDocs": "enable",
+  "tinymist.completion.triggerOnSnippetPlaceholders": true,
+
+  "tinymist.formatterMode": "typstyle",
+  "tinymist.formatterPrintWidth": 100,
+  "tinymist.formatterProseWrap": false
+}
