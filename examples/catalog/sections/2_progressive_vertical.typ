@@ -2,7 +2,7 @@
 // Public API: slide, body-flow, region, points, runtime.uncover, runtime.only, runtime.alternatives.
 // Defaults: natural flow and intrinsic image sizing; explicit heights only reserve stable evidence regions.
 // Stable regions: chart on pages 5–7, bottom image on 8–10, bottom stack on 14–16, and distributed Points on 17–19.
-#import "@local/systems-slides-template:0.5.0": (
+#import "@local/systems-slides-template:0.6.0": (
   body-flow,
   point,
   points,

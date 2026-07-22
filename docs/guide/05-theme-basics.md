@@ -27,13 +27,27 @@ Theme 安装 Touying 生命周期、16:9 页面、字体、标题区、Footer、
 ## 页面入口
 
 - `title-slide`：标题、作者、机构和活动标识；通常 `counted: false`。
-- `outline-slide`：读取章节结构生成目录。
+- `outline-slide`：读取章节结构生成目录；默认用与一级 Points 一致的实心圆标记。
 - `section-slide`：显式章节分隔页；普通 Deck 不必启用自动章节页。
 - `slide`：普通或特殊页面，支持 title、marks、计数、repeat 和 callback-style body。
 - `== Title`：Touying 标题驱动页面；显式 `slide` 更适合需要 marks、repeat 或页面配置的场景。
 
 逻辑页面是作者表达的一张 slide；渐进状态会生成多个物理 PDF 页面。`counted` 控制
 页面计数，不等同于 PDF 物理页数。
+
+Roadmap 条目较少且希望利用完整正文高度时，开启自动垂直分布：
+
+```typst
+#outline-slide(
+  title: [Roadmap],
+  level: 1,
+  auto-layout: true,
+)
+```
+
+`auto-layout` 保留每个 heading 的自然高度，并均分其余垂直空间；不要再传 `vspace`。
+关闭时继续由 `spacing` 或显式 `vspace` 控制固定节奏。需要编号目录时，可显式传入
+`numbered: (true,)` 和 `numbering: ("1.",)` 覆盖默认圆点。
 
 ## 标题契约
 

@@ -2,6 +2,12 @@
 
 ## Unreleased
 
+## 0.6.0 - 2026-07-22
+
+- BREAKING：`outline-slide` 的默认一级标记由无标记改为与 `points` 一致的实心圆；需要数字时
+  显式传入 `numbered` 与 `numbering`。
+- `outline-slide` 新增 `auto-layout`，在有限正文高度中用 fraction 间距均匀分布 Roadmap
+  条目，并拒绝与显式 `vspace` 同时使用。
 - 为 `page-frame` 增加只作用于正文的 `body-inset`，并禁止可见 chrome 页面通过物理
   `margin` 移动标题或 Footer；增加正文内缩下 Footer 贴底稳定性测试。
 

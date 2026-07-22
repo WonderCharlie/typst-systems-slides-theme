@@ -34,7 +34,7 @@ CASES = (
     Case("flat theme", "_doc-theme", "systems-slides-theme", "title"),
     Case("flat slide", "_doc-slide", "slide", "counted"),
     Case("flat title-slide", "_doc-title-slide", "title-slide", "subtitle"),
-    Case("flat outline-slide", "_doc-outline", "outline-slide", "spacing"),
+    Case("flat outline-slide", "_doc-outline", "outline-slide", "auto-layout"),
     Case("flat section-slide", "_doc-section", "section-slide", "numbered"),
     Case("flat page-mark", "_doc-mark", "page-mark", "slot"),
     Case("flat page-layer", "_doc-layer", "page-layer", "area"),
@@ -87,7 +87,7 @@ def make_source(import_ref: str) -> str:
 #let _doc-theme = systems-slides-theme(title: [Tinymist])[]
 #let _doc-slide = slide(title: [Tinymist], counted: true)[]
 #let _doc-title-slide = title-slide(subtitle: [Tinymist])
-#let _doc-outline = outline-slide(spacing: 20pt)
+#let _doc-outline = outline-slide(spacing: 20pt, auto-layout: true)
 #let _doc-section = section-slide(numbered: false, body: none)
 #let _doc-mark = page-mark([Artifact], slot: "header-end")
 #let _doc-layer = page-layer([Layer], area: "page")

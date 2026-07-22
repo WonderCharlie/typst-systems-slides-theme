@@ -16,7 +16,7 @@
 )
 
 #title-slide(counted: true)
-#outline-slide(title: [Automatic Roadmap], level: 1)
+#outline-slide(title: [Automatic Roadmap], level: 1, auto-layout: true)
 
 = Alpha Section
 

@@ -7,7 +7,7 @@
 Catalog 不是新 Deck 脚手架，也不是完整 API 参数表。创建演示请先安装包，再使用：
 
 ```sh
-typst init @local/systems-slides-template:0.5.0 my-talk
+typst init @local/systems-slides-template:0.6.0 my-talk
 ```
 
 运行 `make catalog-verify` 可编译并验证产品 Catalog。真实演示文稿与面向最终作者的精简

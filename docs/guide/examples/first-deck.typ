@@ -1,4 +1,4 @@
-#import "@local/systems-slides-template:0.5.0": (
+#import "@local/systems-slides-template:0.6.0": (
   lead,
   outline-slide,
   point,

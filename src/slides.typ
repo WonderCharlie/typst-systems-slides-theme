@@ -354,6 +354,8 @@
 /// - level (auto, int): 目录查询层级，默认 `1`；`auto` 使用当前 Touying slide level，显式值应对应已有 heading。
 /// - title (none, content, function): 目录页标题，默认 `[Roadmap]`；`none` 隐藏 header。
 /// - spacing (length): 一级条目垂直节奏，默认 `26pt`；深层派生为三分之一，透传的 vspace 优先且值不得为负。
+/// - auto-layout (bool): 是否自动均分目录条目的垂直自由空间，默认 `false` 保持固定 spacing。
+///   开启时使用 fraction vspace，并禁止同时传入 `vspace`，以免出现两套间距来源。
 /// - setting (function): 目录内容转换函数，默认恒等；在 outline 生成后应用且必须返回 content。
 /// - args (arguments): 透传给 progressive outline 的参数；同名值覆盖本函数派生默认。
 ///
@@ -363,19 +365,32 @@
   level: 1,
   title: [Roadmap],
   spacing: 26pt,
+  auto-layout: false,
   setting: body => body,
   ..args,
 ) = slide(title: title, config: config, self => {
+  assert(type(auto-layout) == bool, message: "outline-slide.auto-layout must be a boolean")
   let named = args.named()
+  assert(
+    not auto-layout or "vspace" not in named,
+    message: "outline-slide: auto-layout and explicit vspace cannot be used together",
+  )
   let indent = named.remove("indent", default: (0pt,))
   if type(indent) != array { indent = (indent,) }
   let vspace = named.remove(
     "vspace",
-    default: (spacing, spacing / 3, spacing / 3, spacing / 3),
+    default: if auto-layout {
+      (1fr, spacing / 3, spacing / 3, spacing / 3)
+    } else {
+      (spacing, spacing / 3, spacing / 3, spacing / 3)
+    },
   )
-  let numbered = named.remove("numbered", default: (false,))
-  let numbering = named.remove("numbering", default: ("1.",))
-  setting(components.custom-progressive-outline(
+  // The default marker deliberately matches the first-level Points marker.
+  // Explicit numbering remains an escape hatch for numbered agendas.
+  let numbered = named.remove("numbered", default: (true,))
+  let bullet-numbering(..numbers) = [•]
+  let numbering = named.remove("numbering", default: (bullet-numbering,))
+  let roadmap = components.custom-progressive-outline(
     title: none,
     depth: if level == auto { self.slide-level } else { level },
     level: level,
@@ -385,7 +400,17 @@
     numbering: numbering,
     ..args.pos(),
     ..named,
-  ))
+  )
+  setting(if auto-layout {
+    // `vspace: 1fr` distributes free height before each top-level entry; the
+    // trailing fraction makes the outer bottom space participate equally.
+    block(width: 100%, height: 100%, above: 0pt, below: 0pt, [
+      #roadmap
+      #v(1fr, weak: false)
+    ])
+  } else {
+    roadmap
+  })
 })
 
 /// 创建显示当前 heading 与可选说明的章节分隔页。

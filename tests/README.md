@@ -34,7 +34,7 @@
 | `body-flow-variation.sh` | 增加换行/Bullet 后无需手工坐标且页数稳定 |
 | `public-api-naming.py` | 精确导出 allowlist、两个命名空间和内容无关命名 |
 | `public-boundary.sh` | 单入口、单向依赖、官方 Touying 和安装 allowlist |
-| `version-sync.sh` | `@local/systems-slides-template:0.5.0` 与官方 Touying 版本引用 |
+| `version-sync.sh` | `@local/systems-slides-template:0.6.0` 与官方 Touying 版本引用 |
 | `check-api-comments.py` | 禁止旧双轨注释，并固定 Tinymist 稳定函数/参数清单 |
 | `documentation-check.py` | 文档职责、失效链接、版本、退役接口和 `///` 注释风格 |
 | `check-tinymist-docs.py` | 中文 `///`、真实签名、100 字符行宽、连续参数、类型词表和返回类型 |
@@ -92,7 +92,7 @@ make tinymist-installed-docs-check
 ```
 
 `tinymist-installed-docs-check` 不会修改安装；它读取已安装的
-`@local/systems-slides-template:0.5.0`，所以源码更新后先执行 `make reinstall`。
+`@local/systems-slides-template:0.6.0`，所以源码更新后先执行 `make reinstall`。
 
 验证真实用户安装时使用：
 

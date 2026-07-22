@@ -8,7 +8,7 @@
 | 配方与目的 | 推荐接口 / 最小调用 | Catalog | 预期与适用条件 | 不推荐 / 常见错误 |
 | --- | --- | ---: | --- | --- |
 | 标题页：交代身份 | `title-slide(subtitle: [...])` | 1 | 无普通正文 chrome；开场使用 | 用普通 slide 手排 metadata；重复计数 |
-| 目录页：展示章节 | `outline-slide(level: 1)` | 2 | 读取 heading；章节稳定后使用 | 手写目录导致漂移 |
+| 目录页：展示章节 | `outline-slide(level: 1, auto-layout: true)` | 2 | 读取 heading；默认圆点并均分垂直自由空间 | 手写目录导致漂移 |
 | 普通 Points | `points((point([...]),))` | 3 | 自然流、多级节奏 | 用空 block 调间距；层级跳跃 |
 | lead + Points | `lead[...]` 后写 `points(...)` | 3、43 | 先限定问题再列证据 | 为自然流增加 split |
 | 上文下图 | `body-flow(... rows: (auto, 1fr))` | 8–10、23 | 图片必须取得余高 | 把前置文字放 flow 外导致溢出 |

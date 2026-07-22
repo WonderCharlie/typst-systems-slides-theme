@@ -18,7 +18,7 @@ Modern 与 Libertinus Serif；不要另外安装同名字体。完整要求见 [
 
 ```sh
 make install
-typst init @local/systems-slides-template:0.5.0 my-talk
+typst init @local/systems-slides-template:0.6.0 my-talk
 cd my-talk
 make
 ```

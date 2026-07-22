@@ -2,7 +2,7 @@
 // Public API: slide, runtime.alternatives, runtime.uncover, column-split, region.
 // Defaults: Theme typography and colors; fixed tracks are specified only where cross-state stability matters.
 // Stable regions: comparison columns, pipeline tracks, and the timeline axis remain invariant.
-#import "@local/systems-slides-template:0.5.0": (
+#import "@local/systems-slides-template:0.6.0": (
   callout,
   column-split,
   region,

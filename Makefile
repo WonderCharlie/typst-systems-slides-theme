@@ -40,6 +40,7 @@ CORE_OUTPUTS := $(addprefix $(TEST_OUTPUT_DIR)/,$(addsuffix .pdf,$(CORE_FIXTURES
 	tinymist-installed-docs-check editor-font-check font-isolation-check version-check api-naming-check public-check \
 	guide-check guide-contract-check guide-examples-check \
 	layout-diagnostics-check layout-debug-check body-flow-diagnostics-check body-flow-variation-check body-flow-distribution-check \
+	navigation-layout-check navigation-diagnostics-check \
 	thumbnail clean
 
 all: starter
@@ -166,6 +167,12 @@ body-flow-variation-check:
 body-flow-distribution-check: $(TEST_OUTPUT_DIR)/body-flow-distribution.pdf
 	$(PYTHON) tests/body-flow-distribution.py $<
 
+navigation-layout-check: $(TEST_OUTPUT_DIR)/navigation.pdf
+	$(PYTHON) tests/navigation-layout.py $<
+
+navigation-diagnostics-check:
+	bash tests/navigation-diagnostics.sh
+
 fixture-check: $(CORE_OUTPUTS)
 	$(PYTHON) tests/fidelity_check.py verify $(TEST_OUTPUT_DIR)/native-theme.pdf \
 		--pages 1 \
@@ -183,6 +190,7 @@ presenter-check: $(TEST_OUTPUT_DIR)/presenter-view.pdf $(STARTER_PDFPC)
 
 core-check: comment-check documentation-check tinymist-docs-static-check editor-font-check font-isolation-check version-check public-check title-contract-check page-mark-title-stability-check \
 	layout-diagnostics-check layout-debug-check body-flow-diagnostics-check body-flow-variation-check body-flow-distribution-check \
+	navigation-layout-check navigation-diagnostics-check \
 	footer-contract-check fixture-check presenter-check
 
 starter-verify: $(STARTER_OUTPUT)

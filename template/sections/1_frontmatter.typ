@@ -11,7 +11,6 @@
 #outline-slide(
   title: [Roadmap],
   level: 1,
-  numbered: (true,),
-  numbering: ("1.",),
+  auto-layout: true,
 )
 #runtime.speaker-note[Preview the question, evidence, and conclusion that organize the talk.]

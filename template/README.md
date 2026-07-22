@@ -1,6 +1,6 @@
 # Systems Slides Template Starter
 
-这是 `@local/systems-slides-template:0.5.0` 的最小初始化骨架。它固定生成四页：标题页、
+这是 `@local/systems-slides-template:0.6.0` 的最小初始化骨架。它固定生成四页：标题页、
 目录页、默认 Points 自然流页面，以及使用 Typst 原生 `image` / `figure` / 引用语义的媒体页。
 Theme 底层继续使用官方 `@preview/touying:0.7.4`。
 
@@ -10,7 +10,7 @@ Theme 底层继续使用官方 `@preview/touying:0.7.4`。
 
 ```sh
 make install
-typst init @local/systems-slides-template:0.5.0 my-talk
+typst init @local/systems-slides-template:0.6.0 my-talk
 cd my-talk
 make
 ```

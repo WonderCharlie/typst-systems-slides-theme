@@ -2,7 +2,7 @@
 // Public API: slide, column-split, region, callout, typography.
 // Defaults: Theme-owned Source Code Pro, native math, body type, colors, and spacing.
 // Stable regions: code and formula canvases keep fixed geometry while explanations remain adjacent.
-#import "@local/systems-slides-template:0.5.0": (
+#import "@local/systems-slides-template:0.6.0": (
   callout,
   column-split,
   region,
