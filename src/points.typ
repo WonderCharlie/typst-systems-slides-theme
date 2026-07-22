@@ -11,6 +11,14 @@
 #let default-points-font = "Poppins"
 #let default-points-ink = rgb("#000000")
 
+// Vertical rhythm keeps root statements as distinct groups while children
+// remain visually attached to their parent.
+#let default-points-vspace-level-1 = 44.19pt
+#let default-points-vspace-level-2 = 12.31pt
+#let default-points-vspace-level-3 = 10pt
+#let default-points-vspace-level-4 = 8pt
+#let default-points-vspace-nest = 13.40pt
+
 #let max-point-level = 4
 
 #let normalize-style(style) = {
@@ -53,8 +61,13 @@
   ),
   leading: 0.38em,
   gap: 45pt,
-  level-gaps: (45pt, 44.65pt, 30pt, 24pt),
-  nest-gap: 15pt,
+  level-gaps: (
+    default-points-vspace-level-1,
+    default-points-vspace-level-2,
+    default-points-vspace-level-3,
+    default-points-vspace-level-4,
+  ),
+  nest-gap: default-points-vspace-nest,
   marker-frame-ratio: 0.94,
 ) = {
   for values in (indents, text-offsets, text-styles, markers, marker-styles) {

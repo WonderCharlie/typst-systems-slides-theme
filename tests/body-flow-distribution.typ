@@ -8,7 +8,12 @@
   section-slides: false,
 )
 
-#let group(fill, body) = block(width: 100%, fill: fill, inset: 0pt, body)
+#let group(fill, body, bottom-inset: 0pt) = block(
+  width: 100%,
+  fill: fill,
+  inset: (bottom: bottom-inset),
+  body,
+)
 
 #slide(title: [Distributed Natural Regions], repeat: 3, self => [
   #body-flow(
@@ -22,13 +27,17 @@
           point([Keep dependency-critical I/O explicit.], level: 2),
         ))
       ])),
-      region(group(rgb("e6f6ec"), runtime.uncover("3-", self: self)[
-        #block(width: 620pt)[
-          #points((
-            point([Require no application changes while preserving existing deployment interfaces.]),
-          ))
-        ]
-      ])),
+      region(group(
+        rgb("e6f6ec"),
+        runtime.uncover("3-", self: self)[
+          #block(width: 620pt)[
+            #points((
+              point([Require no application changes while preserving existing deployment interfaces.]),
+            ))
+          ]
+        ],
+        bottom-inset: 7pt,
+      )),
     ),
     rows: (auto, auto, auto),
     gutter: 3fr,
