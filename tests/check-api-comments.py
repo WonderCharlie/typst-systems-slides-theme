@@ -31,7 +31,7 @@ EXPECTED_PARAMS: dict[str, dict[str, tuple[str, ...]]] = {
         ),
         "outline-slide": (
             "config", "chapters", "current", "level", "title", "numbering", "size", "weight",
-            "spacing", "auto-layout", "current-style", "setting",
+            "spacing", "top-spacing", "bottom-spacing", "auto-layout", "current-style", "setting",
         ),
         "section-slide": ("config", "level", "numbered", "counted", "body"),
     },

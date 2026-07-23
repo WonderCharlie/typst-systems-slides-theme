@@ -54,13 +54,13 @@ def main() -> int:
         for term in header_terms:
             if term not in header:
                 errors.append(f"{section.name} header does not declare {term}")
-        if '#import "@local/systems-slides-template:0.6.1"' not in section_source:
+        if '#import "@local/systems-slides-template:0.6.2"' not in section_source:
             errors.append(f"{section.name} must import the installed public package directly")
         for forbidden in ('../../lib.typ', '/src/', '/themes/', 'compat.typ'):
             if forbidden in section_source:
                 errors.append(f"{section.name} imports forbidden internal path {forbidden!r}")
 
-    if '#import "@local/systems-slides-template:0.6.1": systems-slides-theme' not in globals_source:
+    if '#import "@local/systems-slides-template:0.6.2": systems-slides-theme' not in globals_source:
         errors.append("globals.typ must obtain Theme configuration from the installed public package")
     for leaked in ("stage-box", "body-flow", "column-split", "points", "table"):
         if leaked in globals_source:

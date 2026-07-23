@@ -4,7 +4,7 @@
 
 | 现象 | 原因 | 修复 |
 | --- | --- | --- |
-| 找不到 `@local/systems-slides-template:0.6.1` | 本地包未安装或版本不同 | 在仓库运行 `make install`，再运行 `make install-check` |
+| 找不到 `@local/systems-slides-template:0.6.2` | 本地包未安装或版本不同 | 在仓库运行 `make install`，再运行 `make install-check` |
 | 找不到 Touying | 官方 `@preview/touying:0.7.4` 未缓存且无网络 | 恢复 Typst package 网络或预先缓存官方包，不要复制/fork Touying |
 | unknown font / 数学字体变化 | 绕过 Deck Makefile 或字体路径失效 | 使用 `make`；确认 `fonts/`、`.vscode` 和 `--ignore-system-fonts --ignore-embedded-fonts` |
 | 图片路径在另一工作区失效 | 使用绝对路径或相对 section 路径 | 文件放 `assets/`，调用 `image(asset-path("..."))` |

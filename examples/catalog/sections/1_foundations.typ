@@ -2,7 +2,7 @@
 // Public API: title-slide, outline-slide, slide, page-mark, lead, points, split.
 // Defaults: Theme owns type, color, title rule, body boundary, Footer, tables, and raw code.
 // Stable regions: chrome never depends on body content or presentation state.
-#import "@local/systems-slides-template:0.6.1": (
+#import "@local/systems-slides-template:0.6.2": (
   callout,
   column-split,
   lead,
@@ -58,6 +58,8 @@
   size: 28pt,
   weight: 500,
   spacing: 18pt,
+  top-spacing: 14pt,
+  bottom-spacing: 22pt,
   current-style: (fill: typography.tone-green, weight: 700),
 )
 

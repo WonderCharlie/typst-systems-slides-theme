@@ -38,6 +38,12 @@
   current-style: (fill: rgb("16835d"), weight: 700),
 )
 #outline-slide(title: [Fixed Roadmap], chapters: chapters, auto-layout: false)
+#outline-slide(
+  title: [Manual Outer Spacing],
+  chapters: chapters,
+  top-spacing: 20pt,
+  bottom-spacing: 42pt,
+)
 
 = Alpha Section
 

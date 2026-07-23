@@ -1,4 +1,4 @@
-#import "@local/systems-slides-template:0.6.1": systems-slides-theme
+#import "@local/systems-slides-template:0.6.2": systems-slides-theme
 
 #let asset-path(relative) = {
   assert(type(relative) == str, message: "catalog asset path must be a string")

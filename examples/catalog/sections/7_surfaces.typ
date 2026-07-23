@@ -2,7 +2,7 @@
 // Public API: slide, page-frame, page-mark, column-split, row-split, region.
 // Defaults: title fitting stays on one line and never drops below 30pt; image ratio and Footer remain Theme-owned.
 // Stable regions: title/body boundaries and the four matrix cells use deterministic tracks.
-#import "@local/systems-slides-template:0.6.1": (
+#import "@local/systems-slides-template:0.6.2": (
   column-split,
   lead,
   page-frame,

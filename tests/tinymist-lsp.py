@@ -87,7 +87,12 @@ def make_source(import_ref: str) -> str:
 #let _doc-theme = systems-slides-theme(title: [Tinymist])[]
 #let _doc-slide = slide(title: [Tinymist], counted: true)[]
 #let _doc-title-slide = title-slide(subtitle: [Tinymist])
-#let _doc-outline = outline-slide(spacing: 20pt, auto-layout: true)
+#let _doc-outline = outline-slide(
+  spacing: 20pt,
+  top-spacing: 12pt,
+  bottom-spacing: 18pt,
+  auto-layout: true,
+)
 #let _doc-section = section-slide(numbered: false, body: none)
 #let _doc-mark = page-mark([Artifact], slot: "header-end")
 #let _doc-layer = page-layer([Layer], area: "page")

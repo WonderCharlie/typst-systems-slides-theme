@@ -50,6 +50,10 @@ def main() -> int:
         errors.append("Theme page height must remain exactly 540pt")
     if "footer-height = slide-height - footer-y" not in tokens:
         errors.append("footer.height must be derived as page height minus footer.y")
+    if "#let content-bottom = footer-y" not in geometry:
+        errors.append("Theme body bottom must be derived from the Footer upper boundary")
+    if "bottom: content-bottom" not in geometry:
+        errors.append("systems-layout.body.bottom must equal the Footer upper boundary")
     if "logo-dy" in geometry or "logo-dy" in master:
         errors.append("Footer logo must not use a fixed vertical offset")
     if "let footer-slot" not in master or "align(horizontal + horizon" not in master:
@@ -123,6 +127,7 @@ def main() -> int:
         return 1
     print(
         "Footer contract check passed: y=500.5pt, all slots use vertical centering, "
+        "the finite body ends at the Footer upper boundary, "
         "the symmetric logo is centered within 0.5pt, body-inset leaves Footer pixels unchanged, "
         "and #402B63 reaches the bottom edge at 72/96/144/288 DPI."
     )

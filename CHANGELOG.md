@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+- Roadmap 将自动分布限制在相邻条目之间，并新增独立的 `top-spacing` 与 `bottom-spacing`，
+  使作者能够固定正文上边界到首项、末项到 Footer 上边界的留白，而不影响中间
+  `auto-layout`。
+
 ## 0.6.1 - 2026-07-23
 
 - `outline-slide` 现在可直接接收 `chapters`，以统一的 32pt/600 圆点与正文样式生成 Roadmap；

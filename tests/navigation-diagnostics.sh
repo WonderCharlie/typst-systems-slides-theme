@@ -27,4 +27,18 @@ rg -Fq 'outline-slide.current-style may only define fill and weight' \
     exit 1
   }
 
-printf 'navigation diagnostics: Roadmap emphasis cannot change geometry\n'
+if typst compile --root "$THEME_DIR" --font-path "$FONT_PATH" \
+  "$TEST_DIR/navigation-invalid-outer-spacing.typ" "$QA_TMP/invalid-outer.pdf" \
+  >"$QA_TMP/invalid-outer.log" 2>&1; then
+  printf 'navigation diagnostics failed: fractional manual outer spacing unexpectedly compiled\n' >&2
+  exit 1
+fi
+
+rg -Fq 'outline-slide.top-spacing must be a length, ratio, or relative length' \
+  "$QA_TMP/invalid-outer.log" || {
+    sed -n '1,100p' "$QA_TMP/invalid-outer.log" >&2
+    printf 'navigation diagnostics failed: expected top-spacing message was not reported\n' >&2
+    exit 1
+  }
+
+printf 'navigation diagnostics: emphasis stays geometric and manual outer spacing stays fixed\n'

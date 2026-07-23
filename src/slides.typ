@@ -362,10 +362,14 @@
 ///   函数接收一基索引并返回标记，`none` 隐藏标记但保留统一的正文起点。
 /// - size (length): 标记和正文的统一字号，默认 `32pt`，必须为正值。
 /// - weight (int, str): 标记和正文的统一字重，默认 `600`（semibold）。
-/// - spacing (auto, length, ratio, relative, fraction): 条目及上下外侧间距，默认 `auto`。
+/// - spacing (auto, length, ratio, relative, fraction): 相邻条目之间的间距，默认 `auto`。
 ///   自动布局时 `auto` 使用 `1fr` 均分正文自由空间；固定布局时使用 `26pt`。
+/// - top-spacing (length, ratio, relative): 正文内容上边界到第一项之前的固定留白，默认 `0pt`。
+///   它不参与 `auto-layout` 的自由空间分配。
+/// - bottom-spacing (length, ratio, relative): 最后一项布局下边缘到 Footer 上边界的固定留白，默认 `12pt`。
+///   它不以页面底边为基准，也不参与 `auto-layout` 的自由空间分配。
 /// - auto-layout (bool): 是否让 Roadmap 使用正文余高均匀分布，默认 `true`。
-///   两种模式的第一项使用同一顶部锚点；自动模式只分配内部间距和底部余量。
+///   自动模式只分配相邻条目之间的间距，不改变显式首尾留白。
 /// - current-style (dictionary): 当前项强调，默认主题紫色与 `700` 字重。
 ///   只允许 `fill` 和 `weight`，防止强调改变字号、字体或基线并造成跳动。
 /// - setting (function): Roadmap 内容转换函数，默认恒等；在统一布局完成后应用。
@@ -381,6 +385,8 @@
   size: 32pt,
   weight: 600,
   spacing: auto,
+  top-spacing: 0pt,
+  bottom-spacing: 12pt,
   auto-layout: true,
   current-style: (fill: purple, weight: 700),
   setting: body => body,
@@ -399,6 +405,14 @@
   assert(
     spacing == auto or type(spacing) in (length, ratio, relative, fraction),
     message: "outline-slide.spacing must be auto, a length, ratio, relative length, or fraction",
+  )
+  assert(
+    type(top-spacing) in (length, ratio, relative),
+    message: "outline-slide.top-spacing must be a length, ratio, or relative length",
+  )
+  assert(
+    type(bottom-spacing) in (length, ratio, relative),
+    message: "outline-slide.bottom-spacing must be a length, ratio, or relative length",
   )
   assert(type(auto-layout) == bool, message: "outline-slide.auto-layout must be a boolean")
   assert(
@@ -452,7 +466,7 @@
       rows,
       rows: (auto,) * rows.len(),
       gutter: resolved-spacing,
-      outer-gutter: if auto-layout { (0pt, resolved-spacing) } else { 0pt },
+      outer-gutter: (top-spacing, bottom-spacing),
     )
     setting(roadmap)
   }

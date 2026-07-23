@@ -52,10 +52,25 @@ Theme 安装 Touying 生命周期、16:9 页面、字体、标题区、Footer、
 )
 ```
 
-默认 `auto-layout: true` 固定第一项的正文顶部锚点，只均分内部间距与底部余量；关闭后
-第一项位置保持不变，改用固定 `spacing`。`current` 默认通过主题紫色和 700 字重突出当前项，
-不会改变字号或推动其他条目。需要数字 Roadmap 时传 `numbering: "1."`；字号、普通字重、
-间距和 `current-style` 也可局部覆盖，但强调样式只能改变颜色与字重。
+默认 `auto-layout: true` 只把正文余高均分给相邻条目之间的间距。第一项之前和最后一项
+之后的留白分别由 `top-spacing` 与 `bottom-spacing` 显式控制，默认分别为 `0pt` 和
+`12pt`。`top-spacing` 从 Theme 的正文内容上边界开始量取；`bottom-spacing` 从最后一项的
+布局下边缘量到 Footer 紫色区域的上边界，而不是量到物理页面底边。它们不会参与自动分配，
+因此作者可以稳定控制 Roadmap 的上下边界。关闭自动布局后，中间改用固定 `spacing`，首尾
+留白仍保持不变。`current` 默认通过主题紫色和 700 字重突出当前项，不会改变字号或推动
+其他条目。
+
+```typst
+#outline-slide(
+  title: [Roadmap],
+  chapters: chapters,
+  top-spacing: 14pt,
+  bottom-spacing: 22pt,
+)
+```
+
+需要数字 Roadmap 时传 `numbering: "1."`；字号、普通字重、中间间距、首尾留白和
+`current-style` 均可局部覆盖，但强调样式只能改变颜色与字重。
 
 不显式传 `chapters` 时，组件仍可查询 `level` 对应的 outlined headings。Roadmap 的规则只
 作用于本次 `outline-slide` 调用，不修改 Typst 原生列表或 `points`。

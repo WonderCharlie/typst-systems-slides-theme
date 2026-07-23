@@ -24,7 +24,7 @@ def main() -> int:
 
     with tempfile.TemporaryDirectory(prefix="systems-navigation-") as temp:
         sources = []
-        for page in (2, 3, 4, 5):
+        for page in (2, 3, 4, 5, 6):
             bbox = Path(temp) / f"roadmap-{page}.html"
             subprocess.run(
                 ["pdftotext", "-f", str(page), "-l", str(page), "-bbox", str(pdf), str(bbox)],
@@ -94,6 +94,34 @@ def main() -> int:
             f"auto={entries[0]:.3f}pt, fixed={fixed_problem[0] if fixed_problem else 'missing'}"
         )
 
+    manual_words = words_by_page[4]
+    manual_entries = []
+    for label in ("Problem", "Observation", "Design", "Implementation", "Evaluation", "Conclusion"):
+        matches = [
+            (top + bottom) / 2
+            for text, top, bottom in manual_words
+            if text == label
+        ]
+        if len(matches) != 1:
+            fail(f"expected one {label} entry on manual-spacing page, found {len(matches)}")
+        manual_entries.append(matches[0])
+    if abs((manual_entries[0] - entries[0]) - 20.0) > 0.05:
+        fail(
+            "top-spacing does not independently move the first entry by 20pt: "
+            f"default={entries[0]:.3f}pt, manual={manual_entries[0]:.3f}pt"
+        )
+    if abs((entries[-1] - manual_entries[-1]) - 30.0) > 0.05:
+        fail(
+            "bottom-spacing does not independently move the last entry by 30pt: "
+            f"default={entries[-1]:.3f}pt, manual={manual_entries[-1]:.3f}pt"
+        )
+    manual_gaps = [
+        manual_entries[index + 1] - manual_entries[index]
+        for index in range(len(manual_entries) - 1)
+    ]
+    if max(manual_gaps) - min(manual_gaps) > 0.05:
+        fail(f"manual outer spacing changes automatic internal distribution: {manual_gaps}")
+
     numbered = [text for text, _, _ in words_by_page[2] if re.fullmatch(r"[1-6]\.", text)]
     if numbered != ["1.", "2.", "3.", "4.", "5.", "6."]:
         fail(f"numbering override did not render 1.–6.; got {numbered}")
@@ -134,7 +162,7 @@ def main() -> int:
 
     print(
         "navigation layout: six default bullet entries use equal vertical spacing; "
-        "current and numbered override pages rendered"
+        "current, numbered, and independent outer-spacing pages rendered"
     )
     return 0
 
